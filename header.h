@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcorlys- <pcorlys-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/23 11:16:43 by pcorlys-          #+#    #+#             */
-/*   Updated: 2019/03/23 11:38:35 by pcorlys-         ###   ########.fr       */
+/*   Created: 2019/03/23 11:17:56 by pcorlys-          #+#    #+#             */
+/*   Updated: 2019/03/23 11:38:18 by pcorlys-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#ifndef FDF_HEADER_H
+#define FDF_HEADER_H
 
-int main(int argc, char **argv)
-{
-	valid(argc, argv[1]);
-	return 0;
-}
+# include <stdio.h>
+# include <math.h>
+# include <stdlib.h>
+# include <mlx.h>
+# include <fcntl.h>
+# include "libft/libft.h"
+
+void	valid(int argc, char *argv);
+
+#endif
