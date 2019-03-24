@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.h                                           :+:      :+:    :+:   */
+/*   record_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcorlys- <pcorlys-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/23 11:17:56 by pcorlys-          #+#    #+#             */
-/*   Updated: 2019/03/24 11:05:20 by pcorlys-         ###   ########.fr       */
+/*   Created: 2019/03/24 10:48:44 by pcorlys-          #+#    #+#             */
+/*   Updated: 2019/03/24 11:05:15 by pcorlys-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_HEADER_H
-#define FDF_HEADER_H
+#include "header.h"
 
-# include <stdio.h>
-# include <math.h>
-# include <stdlib.h>
-# include <mlx.h>
-# include <fcntl.h>
-# include "libft/libft.h"
-
-typedef struct	s_map
+void	record_map(char *argv)
 {
-	int 		x;
-	int 		y;
-	int 		z;
-	int 		color;
-}				t_map;
+	int 	fd;
 
-void	valid(int argc, char *argv);
+	fd = open(argv, O_RDONLY);
 
-#endif
+
+	close(fd);
+}
