@@ -6,7 +6,7 @@
 /*   By: pcorlys- <pcorlys-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 11:17:56 by pcorlys-          #+#    #+#             */
-/*   Updated: 2019/03/24 11:05:20 by pcorlys-         ###   ########.fr       */
+/*   Updated: 2019/03/26 17:10:19 by pcorlys-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ typedef struct	s_map
 	int 		color;
 }				t_map;
 
-void	valid(int argc, char *argv);
-
+int				*valid(int argc, char *argv);
+int				*record_map(char *argv, int *size_map);
 #endif
