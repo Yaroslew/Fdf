@@ -6,7 +6,7 @@
 /*   By: pcorlys- <pcorlys-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 11:16:43 by pcorlys-          #+#    #+#             */
-/*   Updated: 2019/03/26 19:52:12 by pcorlys-         ###   ########.fr       */
+/*   Updated: 2019/03/26 20:03:25 by pcorlys-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 	int q = 0;
 	while(q < size_map[0] * size_map[1])
 	{
-//		printf("x=%d y=%d z=%d color=%d\n", map[q].x, map[q].y, map[q].z, map[q].color);
+	printf("x=%d y=%d z=%d color=%d\n", map[q].x, map[q].y, map[q].z, map[q].color);
 		q++;
 	}
 	return 0;

@@ -6,7 +6,7 @@
 /*   By: pcorlys- <pcorlys-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 10:48:44 by pcorlys-          #+#    #+#             */
-/*   Updated: 2019/03/26 20:35:48 by pcorlys-         ###   ########.fr       */
+/*   Updated: 2019/03/26 20:54:35 by pcorlys-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,7 @@ static void	write_line(t_map *map, int fd, int *size_map)
 		{
 			map[ind].x = q;
 			map[ind].y = r;
-			printf("x=%d y=%d r=%d\n", map[q].x, map[q].y, r);
-//			write_color_z(split[q], map, ind);
-
+			write_color_z(split[q], map, ind);
 			q++;
 			ind++;
 		}
