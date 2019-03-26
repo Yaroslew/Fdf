@@ -6,7 +6,7 @@
 /*   By: pcorlys- <pcorlys-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 10:48:44 by pcorlys-          #+#    #+#             */
-/*   Updated: 2019/03/26 19:29:31 by pcorlys-         ###   ########.fr       */
+/*   Updated: 2019/03/26 20:35:48 by pcorlys-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,11 @@ static int	write_color(char *arr)
 		temp += arr[q] * pow(16, r);
 		q--;
 		r++;
-		printf("temp=%d\n", temp);
 	}
-//	printf("temp=%d\n", temp);
-	return (1);
+	return (temp);
 }
 
-static void write_color_z(char *split, t_map now)
+static void write_color_z(char *split, t_map *map, int ind)
 {
 	int 	q;
 	char 	**arr;
@@ -55,13 +53,14 @@ static void write_color_z(char *split, t_map now)
 		if (split[q] == ',')
 		{
 			arr = ft_strsplit(split, ',');
-			now.z = ft_atoi(arr[0]);
-			now.color = write_color(arr[1]);
+			map[ind].z = ft_atoi(arr[0]);
+			map[ind].color = write_color(arr[1]);
+			return ;
 		}
-
 		q++;
 	}
-
+	map[ind].z = ft_atoi(split);
+	map[ind].color = 0;
 }
 
 static void	write_line(t_map *map, int fd, int *size_map)
@@ -70,25 +69,30 @@ static void	write_line(t_map *map, int fd, int *size_map)
 	char 	*line;
 	int 	q;
 	int 	r;
+	int 	ind;
 
 	q = 0;
 	r = 0;
+	ind = 0;
 	while(get_next_line(fd, &line))
 	{
 		split = ft_strsplit(line, ' ');
 		while(split[q])
 		{
-			map[q * r + q].x = q;
-			map[q * r + q].y = r;
-			write_color_z(split[q], map[q * r + q]);
+			map[ind].x = q;
+			map[ind].y = r;
+			printf("x=%d y=%d r=%d\n", map[q].x, map[q].y, r);
+//			write_color_z(split[q], map, ind);
+
 			q++;
+			ind++;
 		}
 		r++;
 		q = 0;
 	}
 }
 
-int			*record_map(char *argv, int *size_map)
+t_map			*record_map(char *argv, int *size_map)
 {
 	int 	fd;
 	t_map 	*map;
@@ -98,4 +102,5 @@ int			*record_map(char *argv, int *size_map)
 	write_line(map, fd, size_map);
 
 	close(fd);
+	return (map);
 }
