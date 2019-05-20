@@ -6,7 +6,7 @@
 /*   By: pcorlys- <pcorlys-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 15:16:49 by pcorlys-          #+#    #+#             */
-/*   Updated: 2019/04/07 17:55:35 by pcorlys-         ###   ########.fr       */
+/*   Updated: 2019/05/20 19:51:01 by pcorlys-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,9 @@ void		standart_output(void *img_ptr, t_map *map, int *size_map)
 			draw_line(data_img, map[q], map[q + size_map[0]]);
 		q++;
 	}
+}
+
+void	output(void *img_ptr, t_map *map, int *size_map)
+{
+
 }

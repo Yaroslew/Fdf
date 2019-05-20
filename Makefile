@@ -3,7 +3,7 @@ LIB = libft/libft.a
 INCL = ./header.h
 FLAGS = -Wall -Wextra -Werror
 
-OBJ = ./main.o ./valid.o ./standart_output.o ./record_map.o ./img_operation.o ./draw_line.o
+OBJ = ./main.o ./valid.o ./standart_output.o ./record_map.o ./img_operation.o ./draw_line.o ./turns.o
 
 all: $(NAME)
 
