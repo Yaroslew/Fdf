@@ -6,7 +6,7 @@
 /*   By: pcorlys- <pcorlys-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/30 11:17:26 by pcorlys-          #+#    #+#             */
-/*   Updated: 2019/04/07 17:01:14 by pcorlys-         ###   ########.fr       */
+/*   Updated: 2019/04/07 17:04:48 by pcorlys-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void			draw_line(int *img_data, t_map one, t_map two)
 		delta_y = one.y - two.y;
 	else
 		delta_y = two.y - one.y;
-	printf("dx=%d dy=%d \n", delta_x, delta_y);
 	if (delta_x > delta_y)
 		step_x(one, two, delta_y, img_data);
 	else
