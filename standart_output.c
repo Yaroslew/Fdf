@@ -6,7 +6,7 @@
 /*   By: pcorlys- <pcorlys-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 15:16:49 by pcorlys-          #+#    #+#             */
-/*   Updated: 2019/05/20 19:51:01 by pcorlys-         ###   ########.fr       */
+/*   Updated: 2019/05/22 19:41:34 by pcorlys-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,21 @@ void		standart_output(void *img_ptr, t_map *map, int *size_map)
 	}
 }
 
-void	output(void *img_ptr, t_map *map, int *size_map)
+void	output(t_base *base)
 {
+	int	q;
+	t_map	*map;
 
+	q = 0;
+	clean_img(base);
+	map = base->map;
+
+	while (q < base->size_map[0] * base->size_map[1])
+	{
+//		if (base->flag == 1)
+//			printf("%d\n", map[q].y + map[q].x);
+		base->data_img[base->ver_win * map[q].y + map[q].x] = 0xffffff;
+		q++;
+	}
+	mlx_put_image_to_window(base->mlx_ptr, base->win_ptr, base->img_ptr, 10, 10);
 }

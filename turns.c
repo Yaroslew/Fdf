@@ -6,7 +6,7 @@
 /*   By: pcorlys- <pcorlys-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 18:52:26 by pcorlys-          #+#    #+#             */
-/*   Updated: 2019/05/20 19:42:48 by pcorlys-         ###   ########.fr       */
+/*   Updated: 2019/05/22 19:48:34 by pcorlys-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,21 @@ void		turn_left(t_base *base)
 	int		sum;
 
 	sum = base->size_map[0] * base->size_map[1];
-	printf("%d\n", sum);
 	degree = 53.27;
 	map = base->map;
 	q = 0;
 
-	while (q < sum - 1)
+	while (q < sum)
 	{
-		printf("%d\n", q);
 		map[q].y = map[q].y * cos(degree) + (map[q].z * sin(degree));
-		map[q].z = map[q].y * sin(degree) + (map[q].z * cos(degree));
+		map[q].z = (map[q].y * -1) * sin(degree) + (map[q].z * cos(degree));
 		q++;
+		if (map[q - 1].y < 0)
+			map[q-1].y *= -1;
+		if (map[q-1].z < 0)
+			map[q-1].z *= -1;
+
 	}
-//	standart_output(base->img_ptr, base->map, base->size_map);
+	base->flag = 1;
+	output(base);
 }
