@@ -6,7 +6,7 @@
 /*   By: pcorlys- <pcorlys-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 15:39:06 by pcorlys-          #+#    #+#             */
-/*   Updated: 2019/05/22 20:04:43 by pcorlys-         ###   ########.fr       */
+/*   Updated: 2019/05/29 19:44:40 by pcorlys-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,11 @@ int 	*create_img_data(void *img_ptr)
 void		clean_img(t_base *base)
 {
 	int 	q;
-	int *data;
 
 	q = 0;
-	data = base->data_img;
 	while (q < base->hor_win * base->ver_win)
 	{
-		data[q] = 0;
+		base->data_img[q] = 0;
 		q++;
 	}
 }

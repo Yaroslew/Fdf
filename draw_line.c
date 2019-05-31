@@ -5,91 +5,92 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcorlys- <pcorlys-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/30 11:17:26 by pcorlys-          #+#    #+#             */
-/*   Updated: 2019/04/07 17:04:48 by pcorlys-         ###   ########.fr       */
+/*   Created: 2019/05/25 08:40:40 by pcorlys-          #+#    #+#             */
+/*   Updated: 2019/05/29 19:36:07 by pcorlys-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-static int		dir(int diry)
+static void step_y(float del_err, t_map one, t_map two, t_base *base)
 {
-	if (diry > 0)
-		diry = -1;
-	if (diry < 0)
-		diry = 1;
-	return (diry);
-}
+	int diry;
+	float error;
+	int pos_x;
+	int pos_y;
+	int flag;
 
-static void		step_x(t_map one, t_map two, int delta_y, int *img_data)
-{
-	int			diry;
-	int			delta_err;
-	int			error;
-	int			delta_x;
-
+	flag = 0;
+	pos_x = (base->hor_win - (base->size_map[0] * 10)) / 2;
+	pos_y = (base->ver_win - (base->size_map[1] * 10)) / 2;
+//	printf("%d %d\n", pos_x, pos_y);
+	diry = 1;
 	error = 0;
-	one.x > two.x ? (delta_x = one.x - two.x) : 0;
-	one.x <= two.x ? (delta_x = two.x - one.x) : 0;
-	diry = one.y - two.y;
-	delta_y == 0 ? (delta_err = 0) : 0;
-	delta_y != 0 ? (delta_err = ((float)delta_y / (float)delta_x) * 100) : 0;
-	diry = dir(diry);
-	while (one.x != two.x)
+	one.x - two.x > 0 ? (diry = -1) : 0;
+	while (base->c_map->y != two.y)
 	{
-		img_data[one.y * 1000 + one.x] = 0xffffff;
-		one.x > two.x ? (one.x--) : (one.x++);
-		error += delta_err;
-		if (error > 50)
+		base->position = (base->ver_win * pos_y) +
+						 (base->ver_win * base->c_map->y + base->c_map->x + pos_x);
+		base->data_img[base->position] = get_color(base->c_map[0], one, two, flag);
+		error += del_err;
+		if (error >  0.5)
 		{
-			one.y += diry;
-			error -= 100;
+			base->c_map->x += diry;
+			error -= 1.0;
 		}
+		one.y > two.y ? (base->c_map->y--) : base->c_map->y++;
 	}
 }
 
-static void		step_y(t_map one, t_map two, int delta_y, int *img_data)
+static void step_x(float del_err, t_map one, t_map two, t_base *base)
 {
-	int			diry;
-	int			delta_err;
-	int			error;
-	int			delta_x;
+	int diry;
+	float error;
+	int pos_x;
+	int pos_y;
+	int flag;
 
+	flag = 1;
+	pos_x = (base->hor_win - (base->size_map[0] * 10)) / 2;
+	pos_y = (base->ver_win - (base->size_map[1] * 10)) / 2;
+//	printf("%d %d\n", pos_x, pos_y);
+	diry = 1;
 	error = 0;
-	one.x > two.x ? (delta_x = one.x - two.x) : 0;
-	one.x <= two.x ? (delta_x = two.x - one.x) : 0;
-	diry = one.x - two.x;
-	delta_x == 0 ? (delta_err = 0) : 0;
-	delta_x != 0 ? (delta_err = ((float)delta_x / (float)delta_y) * 100) : 0;
-	diry = dir(diry);
-	while (one.y != two.y)
+	one.y - two.y > 0 ? (diry = -1) : 0;
+	while (base->c_map->x  != two.x)
 	{
-		img_data[one.y * 1000 + one.x] = 0xffffff;
-		one.y > two.y ? (one.y--) : (one.y++);
-		error += delta_err;
-		if (error > 50)
+
+		base->position = (base->ver_win * pos_y) +
+						 (base->ver_win * base->c_map->y + base->c_map->x + pos_x);
+		base->data_img[base->position] = get_color(base->c_map[0], one, two, flag);
+		error += del_err;
+		if (error >  0.5)
 		{
-			one.x += diry;
-			error -= 100;
+			base->c_map->y += diry;
+			error -= 1.0;
 		}
+		one.x > two.x ? (base->c_map->x--) : base->c_map->x++;
 	}
 }
 
-void			draw_line(int *img_data, t_map one, t_map two)
+void	draw_line(t_map one, t_map two, t_base *base)
 {
-	int			delta_y;
-	int			delta_x;
-
-	if (one.x >= two.x)
-		delta_x = one.x - two.x;
-	else
-		delta_x = two.x - one.x;
-	if (one.y >= two.y)
-		delta_y = one.y - two.y;
-	else
-		delta_y = two.y - one.y;
+	int	delta_x;
+	int delta_y;
+	float delta_err;
+	one.x > two.x ? (delta_x = one.x - two.x) : 0;
+	one.x > two.x ? 0 : (delta_x = two.x - one.x);
+	one.y > two.y ? (delta_y = one.y - two.y) : 0;
+	one.y > two.y ? 0 : (delta_y = two.y - one.y);
+	delta_x > delta_y ? (delta_err = (float)delta_y / (float)delta_x) : 0;
+	delta_x > delta_y ? 0 : (delta_err = (float)delta_x / (float)delta_x);
+	base->c_map = malloc(sizeof(t_map));
+	base->c_map->x = one.x;
+	base->c_map->y = one.y;
+	base->c_map->z = one.z;
+	base->c_map->color = one.color;
 	if (delta_x > delta_y)
-		step_x(one, two, delta_y, img_data);
+		step_x(delta_err, one, two, base);
 	else
-		step_y(one, two, delta_y, img_data);
+		step_y(delta_err, one, two, base);
 }

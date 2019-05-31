@@ -6,7 +6,7 @@
 /*   By: pcorlys- <pcorlys-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 10:48:44 by pcorlys-          #+#    #+#             */
-/*   Updated: 2019/04/07 17:17:23 by pcorlys-         ###   ########.fr       */
+/*   Updated: 2019/05/31 20:42:34 by pcorlys-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,35 +27,61 @@ static void	free_arr(char ***arr)
 	**arr = NULL;
 }
 
+static int symbol(int flag, char base)
+{
+	char	a;
+	char 	ab;
+	int 	res;
+
+	res = 10;
+	a = 'A';
+	ab = 'a';
+	if (flag)
+	{
+		while (ab != base)
+		{
+			res++;
+			ab++;
+		}
+	}
+	else
+	{
+		while (a != base)
+		{
+			res++;
+			a++;
+		}
+	}
+	return (res);
+}
+
 static int	write_color(char *arr)
 {
 	int		q;
-	int		temp;
 	int		r;
+	int		res;
+	int		temp;
 
-	q = 2;
 	r = 0;
+	q = 2;
+	res = 0;
+
 	while (arr[q])
 	{
+		if (arr[q] > 64 && arr[q] < 71)
+			temp = symbol(0, arr[q]);
+		if (arr[q] > 96 && arr[q] < 103)
+			temp = symbol(1, arr[q]);
 		if (arr[q] > 47 && arr[q] < 58)
-			arr[q] -= 48;
-		else if (arr[q] > 64 && arr[q] < 71)
-			arr[q] -= 55;
-		else if (arr[q] > 96 && arr[q] < 103)
-			arr[q] -= 87;
+			temp = arr[q] - 48;
+		res += temp * (pow(16, r));
 		q++;
-	}
-	q--;
-	while (q > 1)
-	{
-		temp += arr[q] * pow(16, r);
-		q--;
 		r++;
 	}
-	return (temp);
+	return (res);
 }
 
-static void	write_color_z(char *split, t_map *map, int ind)
+static void	write_color_z(char *split, t_map *map, int ind, t_base *base)
 {
 	int		q;
 	char	**arr;
@@ -69,15 +95,16 @@ static void	write_color_z(char *split, t_map *map, int ind)
 			map[ind].z = ft_atoi(arr[0]);
 			map[ind].color = write_color(arr[1]);
 			free_arr(&arr);
+//			printf("%d \n", map[ind].color);
 			return ;
 		}
 		q++;
 	}
-	map[ind].z = ft_atoi(split);
-	map[ind].color = 0;
+	map[ind].z = ft_atoi(split) * base->scale;
+	map[ind].color = base->standart_color;
 }
 
-static void	write_line(t_map *map, int fd, int *size_map, int scale)
+static void	write_line(t_map *map, int fd, int *size_map, t_base *base)
 {
 	char	**split;
 	char	*line;
@@ -93,9 +120,9 @@ static void	write_line(t_map *map, int fd, int *size_map, int scale)
 		split = ft_strsplit(line, ' ');
 		while (split[q])
 		{
-			map[ind].x = q * scale;
-			map[ind].y = r * scale;
-			write_color_z(split[q], map, ind);
+			map[ind].x = q * base->scale;
+			map[ind].y = r * base->scale;
+			write_color_z(split[q], map, ind, base);
 			q++;
 			ind++;
 		}
@@ -105,7 +132,7 @@ static void	write_line(t_map *map, int fd, int *size_map, int scale)
 	}
 }
 
-t_map		*record_map(char *argv, int *size_map, int scale)
+t_map		*record_map(char *argv, int *size_map, t_base *base)
 {
 	int		fd;
 	t_map	*map;
@@ -117,7 +144,7 @@ t_map		*record_map(char *argv, int *size_map, int scale)
 		exit(0);
 	}
 	map = malloc(sizeof(t_map) * (size_map[0] * size_map[1]));
-	write_line(map, fd, size_map, scale);
+	write_line(map, fd, size_map, base);
 	close(fd);
 	return (map);
 }
