@@ -6,7 +6,7 @@
 /*   By: pcorlys- <pcorlys-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 11:16:43 by pcorlys-          #+#    #+#             */
-/*   Updated: 2019/06/01 17:10:32 by pcorlys-         ###   ########.fr       */
+/*   Updated: 2019/06/01 19:38:20 by pcorlys-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,46 @@ static int de_key(int key, t_base *base)
 	return (key);
 }
 
-static void test_map(t_base *base)
+static void test(t_base *base)
 {
-	int q = 0;
-	t_map *map;
+	base->map = malloc(sizeof(t_map) * 3);
+	base->map[0].x = 50;
+	base->map[0].y = 50 ;
+	base->map[0].z = 0;
+	base->map[0].color =0xffffff ;
 
-	map = base->map;
-	while (q < base->size_map[0] * base->size_map[1])
-	{
-		printf("x=%d y=%d z=%d \n", map[q].x, map[q].y, map[q].z);
-		q++;
-	}
+	base->map[1].x = 25;
+	base->map[1].y = 25 ;
+	base->map[1].z = 0;
+	base->map[1].color =0xffffff ;
+
+	base->map[2].x = 25;
+	base->map[2].y = 75 ;
+	base->map[2].z = 0;
+	base->map[2].color =0xffffff ;
+
+
+
+	base->copy_map = malloc(sizeof(t_map) * 3);
+	base->copy_map[0].x = 50;
+	base->copy_map[0].y = 50 ;
+	base->copy_map[0].z = 0;
+	base->copy_map[0].color =0xffffff ;
+
+	base->copy_map[1].x = 25;
+	base->copy_map[1].y = 25;
+	base->copy_map[1].z = 0;
+	base->copy_map[1].color =0xffffff ;
+
+	base->copy_map[2].x = 25;
+	base->copy_map[2].y = 75 ;
+	base->copy_map[2].z = 0;
+	base->copy_map[2].color =0xffffff ;
+
+	draw_line(base->map[0], base->map[1], base);
+	draw_line(base->map[0], base->map[2], base);
+	mlx_put_image_to_window(base->mlx_ptr, base->win_ptr, base->img_ptr, 0, 0);
+
 }
 
 int main(int argc, char **argv)
@@ -65,13 +94,14 @@ int main(int argc, char **argv)
 	base->scale = 10;
 	base->degree_std = 0.174533;
 	base->standart_color = 0xff;
+
 	base->map = record_map(argv[1], base->size_map, base);
 	base->copy_map = record_map(argv[1], base->size_map, base);
-//	test_map(base);
 	base->mlx_ptr = mlx_init();
 	base->win_ptr = mlx_new_window(base->mlx_ptr, base->ver_win, base->hor_win, "Fdf");
 	base->img_ptr = create_img(base);
 	base->data_img = (int*)create_img_data(base->img_ptr);
+//	test(base);
 	output(base);
 
 	mlx_key_hook(base->win_ptr, de_key, (t_base*)base);
