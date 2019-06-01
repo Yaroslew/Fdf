@@ -6,7 +6,7 @@
 /*   By: pcorlys- <pcorlys-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 11:16:43 by pcorlys-          #+#    #+#             */
-/*   Updated: 2019/05/31 17:47:35 by pcorlys-         ###   ########.fr       */
+/*   Updated: 2019/06/01 17:10:32 by pcorlys-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,25 @@ static int de_key(int key, t_base *base)
 		turn_y(base, 0);
 	if (key == 36)
 		std_out(base);
-
+	if (key == 6)
+		turn_z(base, 0);
+	if (key == 7)
+		turn_z(base, 1);
 
 	return (key);
+}
+
+static void test_map(t_base *base)
+{
+	int q = 0;
+	t_map *map;
+
+	map = base->map;
+	while (q < base->size_map[0] * base->size_map[1])
+	{
+		printf("x=%d y=%d z=%d \n", map[q].x, map[q].y, map[q].z);
+		q++;
+	}
 }
 
 int main(int argc, char **argv)
@@ -50,7 +66,8 @@ int main(int argc, char **argv)
 	base->degree_std = 0.174533;
 	base->standart_color = 0xff;
 	base->map = record_map(argv[1], base->size_map, base);
-//	base->copy_map = record_map(argv[1], base->size_map, base);
+	base->copy_map = record_map(argv[1], base->size_map, base);
+//	test_map(base);
 	base->mlx_ptr = mlx_init();
 	base->win_ptr = mlx_new_window(base->mlx_ptr, base->ver_win, base->hor_win, "Fdf");
 	base->img_ptr = create_img(base);

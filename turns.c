@@ -6,7 +6,7 @@
 /*   By: pcorlys- <pcorlys-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 18:52:26 by pcorlys-          #+#    #+#             */
-/*   Updated: 2019/05/31 17:39:47 by pcorlys-         ###   ########.fr       */
+/*   Updated: 2019/06/01 10:47:40 by pcorlys-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void		turn_x(t_base *base, int flag)
 	while (q < sum)
 	{
 		map[q].y = copy[q].y * cos(degree) + (copy[q].z * sin(degree));
-		map[q].z = (copy[q].y) * sin(degree) + (copy[q].z * cos(degree));
+		map[q].z = (copy[q].y * sin(degree)) + (copy[q].z * cos(degree));
 		q++;
 	}
 	output(base);
@@ -73,19 +73,33 @@ void		turn_y(t_base *base, int flag)
 	degree = base->degree_y;
 	while (q < sum)
 	{
-		if (flag)
-		{
-			map[q].x = copy[q].x * cos(degree) + (copy[q].z * sin(degree));
-			map[q].z = (copy[q].x * -1) * sin(degree) + (copy[q].z * cos(degree));
-			q++;
-		}
-		else
-		{
-			map[q].x = copy[q].x * cos(degree) + (copy[q].z * sin(degree));
-			map[q].z = (copy[q].x * -1) * sin(degree) + (copy[q].z * cos(degree));
-			q++;
-		}
+		map[q].x = copy[q].x * cos(degree) + (copy[q].z * sin(degree));
+		map[q].z = (copy[q].x * -1) * sin(degree) + (copy[q].z * cos(degree));
+		q++;
+	}
 
+	output(base);
+}
+
+void		turn_z(t_base *base, int flag)
+{
+	int		q;
+	t_map	*map;
+	t_map	*copy;
+	int		sum;
+	double	degree;
+
+	sum = base->size_map[0] * base->size_map[1];
+	map = base->map;
+	copy = base->copy_map;
+	q = 0;
+	degree_xyz(base, flag, 2);
+	degree = base->degree_z;
+	while (q < sum)
+	{
+		map[q].x = copy[q].x * cos(degree) - (copy[q].y * sin(degree));
+		map[q].y = (copy[q].x * -1) * sin(degree) + (copy[q].y * cos(degree));
+		q++;
 	}
 	output(base);
 }

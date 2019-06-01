@@ -6,7 +6,7 @@
 /*   By: pcorlys- <pcorlys-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 08:40:40 by pcorlys-          #+#    #+#             */
-/*   Updated: 2019/05/29 19:36:07 by pcorlys-         ###   ########.fr       */
+/*   Updated: 2019/06/01 17:02:00 by pcorlys-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ static void step_y(float del_err, t_map one, t_map two, t_base *base)
 	int flag;
 
 	flag = 0;
-	pos_x = (base->hor_win - (base->size_map[0] * 10)) / 2;
-	pos_y = (base->ver_win - (base->size_map[1] * 10)) / 2;
-//	printf("%d %d\n", pos_x, pos_y);
+	pos_x = (base->hor_win - (base->size_map[0] * base->scale)) / 2;
+	pos_y = (base->ver_win - (base->size_map[1] * base->scale)) / 2;
 	diry = 1;
 	error = 0;
 	one.x - two.x > 0 ? (diry = -1) : 0;
@@ -51,15 +50,13 @@ static void step_x(float del_err, t_map one, t_map two, t_base *base)
 	int flag;
 
 	flag = 1;
-	pos_x = (base->hor_win - (base->size_map[0] * 10)) / 2;
-	pos_y = (base->ver_win - (base->size_map[1] * 10)) / 2;
-//	printf("%d %d\n", pos_x, pos_y);
+	pos_x = (base->hor_win - (base->size_map[0] * base->scale)) / 2;
+	pos_y = (base->ver_win - (base->size_map[1] * base->scale)) / 2;
 	diry = 1;
 	error = 0;
 	one.y - two.y > 0 ? (diry = -1) : 0;
 	while (base->c_map->x  != two.x)
 	{
-
 		base->position = (base->ver_win * pos_y) +
 						 (base->ver_win * base->c_map->y + base->c_map->x + pos_x);
 		base->data_img[base->position] = get_color(base->c_map[0], one, two, flag);

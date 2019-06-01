@@ -6,7 +6,7 @@
 /*   By: pcorlys- <pcorlys-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/24 10:48:44 by pcorlys-          #+#    #+#             */
-/*   Updated: 2019/05/31 20:42:34 by pcorlys-         ###   ########.fr       */
+/*   Updated: 2019/06/01 17:13:03 by pcorlys-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,9 @@ static void	write_color_z(char *split, t_map *map, int ind, t_base *base)
 		if (split[q] == ',')
 		{
 			arr = ft_strsplit(split, ',');
-			map[ind].z = ft_atoi(arr[0]);
+			map[ind].z = ft_atoi(arr[0]) * base->scale;
 			map[ind].color = write_color(arr[1]);
 			free_arr(&arr);
-//			printf("%d \n", map[ind].color);
 			return ;
 		}
 		q++;

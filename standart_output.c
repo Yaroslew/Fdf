@@ -6,7 +6,7 @@
 /*   By: pcorlys- <pcorlys-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 15:16:49 by pcorlys-          #+#    #+#             */
-/*   Updated: 2019/05/29 19:43:11 by pcorlys-         ###   ########.fr       */
+/*   Updated: 2019/06/01 15:50:09 by pcorlys-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,4 @@ void	output(t_base *base)
 		q++;
 	}
 	mlx_put_image_to_window(base->mlx_ptr, base->win_ptr, base->img_ptr, 0, 0);
-
 }

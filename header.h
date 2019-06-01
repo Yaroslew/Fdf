@@ -6,7 +6,7 @@
 /*   By: pcorlys- <pcorlys-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/23 11:17:56 by pcorlys-          #+#    #+#             */
-/*   Updated: 2019/05/31 17:10:21 by pcorlys-         ###   ########.fr       */
+/*   Updated: 2019/06/01 10:48:38 by pcorlys-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,17 @@ void			valid(int argc, char *argv, int *size_map);
 t_map			*record_map(char *argv, int *size_map, t_base *base);
 int 			*create_img_data(void *img_ptr);
 void			*create_img(t_base *base);
+
 void			clean_img(t_base *base);
+void			std_out(t_base *base);
+
 void			turn_x(t_base *base, int flag);
+void			turn_z(t_base *base, int flag);
+void			turn_y(t_base *base, int flag);
 void			output(t_base *base);
+
 void			draw_line(t_map one, t_map two, t_base *base);
 int				get_color(t_map current, t_map start, t_map end, int flag);
-void			turn_y(t_base *base, int flag);
-void			std_out(t_base *base);
+
 
 #endif
