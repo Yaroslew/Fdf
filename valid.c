@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "fdfHeader.h"
 
 static int check_color(int q, char *line)
 {
@@ -18,10 +18,7 @@ static int check_color(int q, char *line)
 
 	count = 0;
 	if (line[q + 1] != '0' && line[q + 2] != 'x')
-	{
-		write(1, "Error - not true prefix code-color\n", 35);
-		exit(0);
-	}
+		mess_err(5);
 	q += 3;
 	while (line[q] != ' ' && line[q] != '\0' && line[q] != '\t')
 	{
@@ -32,15 +29,9 @@ static int check_color(int q, char *line)
 			count++;
 		}
 		else
-		{
-			write(1, "Error - not true code color\n", 40);
-			exit(0);
-		}
+			mess_err(6);
 		if (count > 8)
-		{
-			write(1, "Error - more tnan 8 symbols in color code\n", 50);
-			exit(0);
-		}
+			mess_err(7);
 	}
 	return (q);
 }
@@ -53,10 +44,7 @@ static int check_ver(int ver, int *size_map)
 		return (0);
 	}
 	else if (size_map[0] != ver)
-	{
-		write(1, "Error - strings dont same\n", 27);
-		exit(0);
-	}
+		mess_err(4);
 	return (0);
 }
 
@@ -66,19 +54,16 @@ static void check_str(int fd, int *size_map)
 	int		q;
 	int		ver;
 
-	ver = 0;
 	while (get_next_line(fd, &line))
 	{
+		ver = 0;
 		size_map[1]++;
 		q = 0;
 		while(line[q])
 		{
 			if ((line[q] < '0' || line[q] > '9') && line[q] != ' ' &&
 				line[q] != '\t' && line[q] != '-' && line[q] != ',')
-			{
-				write(1, "Error - not true symbol\n", 24);
-				exit(0);
-			}
+				mess_err(3);
 			if ((line[q] > 47 && line[q] < 58) && (line[q + 1] == ' ' ||
 			line[q + 1] == '\t' || line[q + 1] == ',' || line[q + 1] == '\0'))
 				ver++;
@@ -93,19 +78,11 @@ static void check_str(int fd, int *size_map)
 void valid(int ac, char *av, int *size_map)
 {
 	int fd;
-	size_map[0] = 0;
-	size_map[1] = 0;
 
 	if (ac != 2)
-	{
-		write(1, "Error - you have more than one argument\n", 40);
-		exit(0);
-	}
+		mess_err(1);
 	if (!(fd = open(av, O_RDONLY)))
-	{
-		write(1, "Error - not open file\n", 22);
-		exit(0);
-	}
+		mess_err(2);
 	check_str(fd, size_map);
 }
 

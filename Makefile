@@ -1,15 +1,20 @@
 NAME = fdf
-LIB = libft/libft.a
-INCL = ./header.h
+LIB = libft/libftprintf.a
+INCL = ./fdfHeader.h
 FLAGS = -Wall -Wextra -Werror
 
-OBJ = ./main.o ./valid.o ./standart_output.o ./record_map.o ./img_operation.o ./draw_line.o ./turns.o ./color.o
+OBJ =   ./main.o \
+        ./valid.o \
+        ./message_errors.c\
+        ./record_map.c\
+        ./draw.c\
+        ./color.c\
 
-all: $(NAME)
+all: $(NAME) $(LIB)
 
 $(NAME): $(OBJ) $(LIB)
-#	@make -C libft
-	@cc $(OBJ) $(LIB) -lmlx -framework OpenGL -framework AppKit -o $@
+	@make -C libft
+	@gcc $(OBJ) $(LIB) -lmlx -framework OpenGL -framework AppKit -o $@
 
 edit: $(OBJ)
 	@gcc $(FLAGS) -o $(OBJ)
@@ -17,11 +22,11 @@ edit: $(OBJ)
 %.o: %.c $(INCL)
 
 clean:
-#	@make clean -C libft
+	@make clean -C libft
 	@rm -f $(OBJ)
 
 fclean: clean
-#	@make fclean -C libft
+	@make fclean -C libft
 	@rm -f $(NAME)
 
 re: fclean all

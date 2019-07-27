@@ -3,108 +3,134 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: uvarly <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: galiza <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/11/27 15:29:06 by uvarly            #+#    #+#              #
-#    Updated: 2019/03/23 10:18:36 by pcorlys-         ###   ########.fr        #
+#    Created: 2019/04/04 19:55:13 by galiza            #+#    #+#              #
+#    Updated: 2019/06/09 21:01:34 by pcorlys-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
-FLAGS = -Wall -Wextra -Werror
+SRC = ft_memset.c\
+	ft_bzero.c \
+	ft_memcpy.c \
+	ft_memccpy.c \
+	ft_memmove.c \
+	ft_memchr.c \
+	ft_memcmp.c \
+	ft_strlen.c \
+	ft_strdup.c \
+	ft_strcpy.c \
+	ft_strncpy.c \
+	ft_strcat.c \
+	ft_strncat.c \
+	ft_strlcat.c \
+	ft_strchr.c \
+	ft_strrchr.c \
+	ft_strstr.c \
+	ft_strnstr.c \
+	ft_strcmp.c \
+	ft_strncmp.c \
+	ft_atoi.c \
+	ft_isalpha.c \
+	ft_isdigit.c \
+	ft_isalnum.c \
+	ft_isascii.c \
+	ft_isprint.c \
+	ft_toupper.c \
+	ft_tolower.c \
+	ft_memalloc.c \
+	ft_memdel.c \
+	ft_strnew.c \
+	ft_strdel.c \
+	ft_strclr.c \
+	ft_striter.c \
+	ft_striteri.c \
+	ft_strmap.c \
+	ft_strmapi.c \
+	ft_strequ.c \
+	ft_strnequ.c \
+	ft_strsub.c \
+	ft_strjoin.c \
+	ft_strtrim.c \
+	ft_strsplit.c \
+	ft_itoa.c \
+	ft_putchar.c \
+	ft_putstr.c \
+	ft_putnstr.c \
+	ft_putendl.c \
+	ft_putnbr.c \
+	ft_putun_nbr.c \
+	ft_putchar_fd.c \
+	ft_putchar_fd.c \
+	ft_putstr_fd.c \
+	ft_putendl_fd.c \
+	ft_putnbr_fd.c \
+	ft_lstnew.c \
+	ft_lstdelone.c \
+	ft_lstdel.c \
+	ft_lstadd.c \
+	ft_lstiter.c \
+	ft_lstmap.c \
+	ft_count_if.c \
+	ft_foreach.c \
+	ft_sqrt.c \
+	ft_iterative_power.c \
+	ft_swap.c \
+	ft_printf.c\
+	ft_strndup.c\
+	get_next_line.c
 
-OBJ = ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o ft_isascii.o \
-      ft_isdigit.o ft_isprint.o ft_itoa.o ft_lstadd.o ft_lstdel.o \
-      ft_lstdelone.o ft_lstiter.o ft_lstmap.o ft_lstnew.o ft_lstpushback.o \
-      ft_lstpushfront.o ft_memalloc.o ft_memccpy.o ft_memchr.o ft_memcmp.o \
-      ft_memcpy.o ft_memdel.o ft_memmove.o ft_memset.o ft_numlen.o ft_putchar.o \
-      ft_putchar_fd.o ft_putendl.o ft_putendl_fd.o ft_putnbr.o ft_putnbr_fd.o \
-      ft_putstr.o ft_putstr_fd.o ft_sortinttab.o ft_strcat.o ft_strchr.o ft_strclr.o \
-      ft_strcmp.o ft_strcpy.o ft_strdel.o ft_strdup.o ft_strequ.o \
-      ft_striter.o ft_striteri.o ft_strjoin.o ft_strlcat.o ft_strlen.o \
-      ft_strmap.o ft_strmapi.o ft_strncat.o ft_strncmp.o ft_strncpy.o  ft_strndup.o\
-      ft_strnequ.o ft_strnew.o ft_strnstr.o ft_strrchr.o ft_strsplit.o \
-      ft_strstr.o ft_strsub.o ft_strtrim.o ft_sqrt.o ft_tolower.o ft_toupper.o \
-	  get_next_line.o
+
+PRINTF = print_c.c\
+		 print_s.c\
+		 print_p.c\
+		 print_f.c\
+		 print_d.c\
+		 print_o.c\
+		 print_u.c\
+		 print_x.c\
+		 print_bigx.c\
+		 print_percent.c\
+		 print_f_sec.c\
+		 print_f_three.c\
+		 print_spaces.c\
+		 print_get_keys.c
+
+OBJ = $(SRC:.c=.o)
+OBJPRINTF = $(PRINTF:.c=.o)
+
+PRINTFDIR = srcs/utils
+SRCDIR = srcs
+OBJDIR = objs
+
+OBJS = $(addprefix $(OBJDIR)/, $(OBJ))
+OBJSPRINTF = $(addprefix $(OBJDIR)/, $(OBJPRINTF))
+HEADER = -I ./includes
+
+CC = gcc
+CFLAGS = -c -Werror -Wextra -Wall
+
+NAME = libftprintf.a
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@ar rc libft.a $(OBJ)
+$(OBJDIR)/%.o: $(PRINTFDIR)/%.c
+	@$(CC) $(CFLAGS) $(HEADER) $< -o $@
 
-edit: $(OBJ)
-	@gcc $(FLAGS) -o $(OBJ)
+$(OBJDIR)/%.o: $(SRCDIR)/%.c 
+	@/bin/mkdir -p $(OBJDIR)
+	@$(CC) $(CFLAGS) $(HEADER) $< -o $@
 
-ft_atoi.o: libft.h
-ft_bzero.o: libft.h get_next_line.h
-ft_isalnum.o: libft.h get_next_line.h
-ft_isalpha.o: libft.h get_next_line.h
-ft_isascii.o: libft.h get_next_line.h
-ft_isdigit.o: libft.h get_next_line.h
-ft_isprint.o: libft.h get_next_line.h
-ft_itoa.o: libft.h get_next_line.h
-ft_lstadd.o: libft.h get_next_line.h
-ft_lstdel.o: libft.h get_next_line.h
-ft_lstdelone.o: libft.h get_next_line.h
-ft_lstiter.o: libft.h get_next_line.h
-ft_lstmap.o: libft.h get_next_line.h
-ft_lstnew.o: libft.h get_next_line.h
-ft_lstpushback.o: libft.h get_next_line.h
-ft_lstpushfront.o: libft.h get_next_line.h
-ft_memalloc.o: libft.h get_next_line.h
-ft_memccpy.o: libft.h get_next_line.h
-ft_memchr.o: libft.h get_next_line.h
-ft_memcmp.o: libft.h get_next_line.h
-ft_memcpy.o: libft.h get_next_line.h
-ft_memdel.o: libft.h get_next_line.h
-ft_memmove.o: libft.h get_next_line.h
-ft_memset.o: libft.h get_next_line.h
-ft_numlen.o: libft.h get_next_line.h
-ft_putchar.o: libft.h get_next_line.h
-ft_putchar_fd.o: libft.h get_next_line.h
-ft_putendl.o: libft.h get_next_line.h
-ft_putendl_fd.o: libft.h get_next_line.h
-ft_putnbr.o: libft.h get_next_line.h
-ft_putnbr_fd.o: libft.h get_next_line.h
-ft_putstr.o: libft.h get_next_line.h
-ft_putstr_fd.o: libft.h get_next_line.h
-ft_sortinttab.o: libft.h get_next_line.h
-ft_strcat.o: libft.h get_next_line.h
-ft_strchr.o: libft.h get_next_line.h
-ft_strclr.o: libft.h get_next_line.h
-ft_strcmp.o: libft.h get_next_line.h
-ft_strcpy.o: libft.h get_next_line.h
-ft_strdel.o: libft.h get_next_line.h
-ft_strdup.o: libft.h get_next_line.h
-ft_strequ.o: libft.h get_next_line.h
-ft_striter.o: libft.h get_next_line.h
-ft_striteri.o: libft.h get_next_line.h
-ft_strjoin.o: libft.h get_next_line.h
-ft_strlcat.o: libft.h get_next_line.h
-ft_strlen.o: libft.h get_next_line.h
-ft_strmap.o: libft.h get_next_line.h
-ft_strmapi.o: libft.h get_next_line.h
-ft_strncat.o: libft.h get_next_line.h
-ft_strncmp.o: libft.h get_next_line.h
-ft_strncpy.o: libft.h get_next_line.h
-ft_strndup.o: libft.h get_next_line.h
-ft_strnequ.o: libft.h get_next_line.h
-ft_strnew.o: libft.h get_next_line.h
-ft_strnstr.o: libft.h get_next_line.h
-ft_strrchr.o: libft.h get_next_line.h
-ft_strsplit.o: libft.h get_next_line.h
-ft_strstr.o: libft.h get_next_line.h
-ft_strsub.o: libft.h get_next_line.h
-ft_strtrim.o: libft.h get_next_line.h
-ft_sqrt.o: libft.h get_next_line.h
-ft_tolower.o: libft.h get_next_line.h
-ft_toupper.o: libft.h get_next_line.h
-get_next_line.o: libft.h get_next_line.h
+$(NAME): $(OBJS) $(OBJSPRINTF)
+	@ar rcs $@ $^
+	@ranlib $@
 
 clean:
-	@rm -f $(OBJ)
+	rm -rf $(OBJDIR)
 
 fclean: clean
-	@rm -f $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re

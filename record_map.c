@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "fdfHeader.h"
 
 static void	free_arr(char ***arr)
 {
@@ -131,19 +131,15 @@ static void	write_line(t_map *map, int fd, int *size_map, t_base *base)
 	}
 }
 
-t_map		*record_map(char *argv, int *size_map, t_base *base)
+void		record_map(char *argv, t_base *base)
 {
 	int		fd;
-	t_map	*map;
 
 	fd = open(argv, O_RDONLY);
 	if (fd < 3)
-	{
-		write(1, "File not open\n", 14);
-		exit(0);
-	}
-	map = malloc(sizeof(t_map) * (size_map[0] * size_map[1]));
-	write_line(map, fd, size_map, base);
+		mess_err(2);
+	base->map = malloc(sizeof(t_map) * (base->size_map[0] * base->size_map[1]));
+	base->map = malloc(sizeof(t_map) * (base->size_map[0] * base->size_map[1]));
+	write_line(base->map, fd, base->size_map, base);
 	close(fd);
-	return (map);
 }
