@@ -138,8 +138,9 @@ void		record_map(char *argv, t_base *base)
 	fd = open(argv, O_RDONLY);
 	if (fd < 3)
 		mess_err(2);
-	base->map = malloc(sizeof(t_map) * (base->size_map[0] * base->size_map[1]));
-	base->map = malloc(sizeof(t_map) * (base->size_map[0] * base->size_map[1]));
+	if (!(base->map = malloc(sizeof(t_map) * (base->size_map[0] * base->size_map[1]))) &&
+		!(base->map = malloc(sizeof(t_map) * (base->size_map[0] * base->size_map[1]))))
+		mess_err(0);
 	write_line(base->map, fd, base->size_map, base);
 	close(fd);
 }

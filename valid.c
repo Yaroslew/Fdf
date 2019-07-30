@@ -36,19 +36,19 @@ static int check_color(int q, char *line)
 	return (q);
 }
 
-static int check_ver(int ver, int *size_map)
+static int check_ver(int ver, t_base *base)
 {
-	if (size_map[0] == 0)
+	if (base->size_map[0] == 0)
 	{
-		size_map[0] = ver;
+		base->size_map[0] = ver;
 		return (0);
 	}
-	else if (size_map[0] != ver)
+	else if (base->size_map[0] != ver)
 		mess_err(4);
 	return (0);
 }
 
-static void check_str(int fd, int *size_map)
+static void check_str(int fd, t_base *base)
 {
 	char	*line;
 	int		q;
@@ -57,7 +57,7 @@ static void check_str(int fd, int *size_map)
 	while (get_next_line(fd, &line))
 	{
 		ver = 0;
-		size_map[1]++;
+		base->size_map[1]++;
 		q = 0;
 		while(line[q])
 		{
@@ -71,18 +71,19 @@ static void check_str(int fd, int *size_map)
 				q = check_color(q, line);
 			q++;
 		}
-		ver = check_ver(ver, size_map);
+		ver = check_ver(ver, base);
 	}
 }
 
-void valid(int ac, char *av, int *size_map)
+void valid(int ac, char *av, t_base *base)
 {
 	int fd;
+
 
 	if (ac != 2)
 		mess_err(1);
 	if (!(fd = open(av, O_RDONLY)))
 		mess_err(2);
-	check_str(fd, size_map);
+	check_str(fd, base);
 }
 

@@ -12,11 +12,11 @@
 
 #include "fdfHeader.h"
 
-static void init_base(t_base *base)
+static t_base *init_base(void)
 {
+	t_base *base;
+
 	if (!(base = malloc(sizeof(t_base) * 1)))
-		mess_err(0);
-	if (!(base->size_map = malloc(sizeof(int) * 2)))
 		mess_err(0);
 	base->size_map[0] = 0;
 	base->size_map[1] = 0;
@@ -29,6 +29,7 @@ static void init_base(t_base *base)
 	base->scale)) / 2;
 	base->lineDraw->posCenterHor = (base->win_ver - (base->size_map[0] *
 	base->scale)) / 2;
+	return (base);
 }
 
 static void init_mlx_win(t_base *base)
@@ -55,14 +56,18 @@ static int de_key(int key, t_base *base)
 
 int main(int ar, char **av)
 {
-	t_base	base;
+	t_base	*base;
 
-	init_base(&base);
-	init_mlx_win(&base);
-	valid(ar, av[1], base.size_map);
-	record_map(av[1], &base);
+	base = init_base();
+	valid(ar, av[1], base);
+	record_map(av[1], base);
 
-	mlx_key_hook(base.win_ptr, de_key, (t_base*)(&base));
-	mlx_loop(base.mlx_ptr);
+	init_mlx_win(base);
+
+//	void *mlxPtr = mlx_init();
+//	void *winPtr = mlx_new_window(mlxPtr, 500, 500, "fdf");
+
+	mlx_key_hook(base->win_ptr, de_key, (t_base*)(base));
+	mlx_loop(base->mlx_ptr);
 }
 
