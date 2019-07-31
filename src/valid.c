@@ -54,18 +54,20 @@ static void check_str(int fd, t_base *base)
 	int		q;
 	int		ver;
 
-	while (get_next_line(fd, &line))
+	while (get_next_line(fd, &line) > 0)
 	{
 		ver = 0;
 		base->size_map[1]++;
 		q = 0;
+		ft_printf("%s\n", line);
 		while(line[q])
 		{
+			
 			if ((line[q] < '0' || line[q] > '9') && line[q] != ' ' &&
 				line[q] != '\t' && line[q] != '-' && line[q] != ',')
 				mess_err(3);
-			if ((line[q] > 47 && line[q] < 58) && (line[q + 1] == ' ' ||
-			line[q + 1] == '\t' || line[q + 1] == ',' || line[q + 1] == '\0'))
+			if ((line[q] > 47 && line[q] < 58) && (line[q + 1] && (line[q + 1] == ' ' ||
+			line[q + 1] == '\t' || line[q + 1] == ',' || line[q + 1] == '\0')))
 				ver++;
 			if (line[q] == ',')
 				q = check_color(q, line);
@@ -78,12 +80,17 @@ static void check_str(int fd, t_base *base)
 void valid(int ac, char *av, t_base *base)
 {
 	int fd;
-
-
+// 	int					ret;
+// char				str_buf[20000+ 1];
 	if (ac != 2)
 		mess_err(1);
 	if (!(fd = open(av, O_RDONLY)))
 		mess_err(2);
+	// while ((ret = read(fd, str_buf, 20000)) > 0)
+	// {
+	// 	str_buf[ret] = '\0';
+	// }
+	// ft_printf("%s\n", str_buf);
 	check_str(fd, base);
 }
 

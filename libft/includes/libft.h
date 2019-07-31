@@ -162,6 +162,7 @@ int					size(long long int i, int base);
 int					un_size(unsigned long long int i, int base);
 int					print_miss(t_flags flags, int len, int strlen);
 char				*clean_fract_one(char *ftitoa);
+int					get_next_line(const int fd, char **line);
 
 /*
 ** ----------------------------- Printf norminette------------------------------

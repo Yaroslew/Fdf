@@ -13,7 +13,7 @@
 #ifndef FDF_FDFHEADER_H
 #define FDF_FDFHEADER_H
 
-# include "libft/includes/libft.h"
+# include "../libft/includes/libft.h"
 # include <math.h>
 # include <mlx.h>
 # include <fcntl.h>

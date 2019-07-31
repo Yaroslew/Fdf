@@ -58,7 +58,7 @@ int main(int ar, char **av)
 	valid(ar, av[1], base);
 	record_map(av[1], base);
 	init_mlx_win(base);
-	stdOutput(base);
+	//stdOutput(base);
 
 	mlx_key_hook(base->win_ptr, de_key, (t_base*)(base));
 	mlx_loop(base->mlx_ptr);

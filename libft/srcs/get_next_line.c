@@ -59,7 +59,6 @@ static char		*ft_copyread(const int fd)
 		str_text = ft_strjoin(str_text, str_buf);
 		free(str_free);
 	}
-	ft_printf("%s\n", str_text);
 	return (str_text);
 }
 
