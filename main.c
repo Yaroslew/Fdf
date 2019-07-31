@@ -25,10 +25,6 @@ static t_base *init_base(void)
 
 	if(!(base->lineDraw = malloc(sizeof(t_line))))
 		mess_err(0);
-	base->lineDraw->posCenterHor = (base->win_hor - (base->size_map[0] *
-	base->scale)) / 2;
-	base->lineDraw->posCenterHor = (base->win_ver - (base->size_map[0] *
-	base->scale)) / 2;
 	return (base);
 }
 
@@ -61,11 +57,8 @@ int main(int ar, char **av)
 	base = init_base();
 	valid(ar, av[1], base);
 	record_map(av[1], base);
-
 	init_mlx_win(base);
-
-//	void *mlxPtr = mlx_init();
-//	void *winPtr = mlx_new_window(mlxPtr, 500, 500, "fdf");
+	stdOutput(base);
 
 	mlx_key_hook(base->win_ptr, de_key, (t_base*)(base));
 	mlx_loop(base->mlx_ptr);

@@ -71,7 +71,7 @@ void			valid(int ac, char *av, t_base *base);
 void			record_map(char *argv, t_base *base);
 int				get_color(t_map current, t_map start, t_map end, int flag);
 void			draw_map(t_base *base);
-
+void			stdOutput(t_base *base);
 
 
 #endif

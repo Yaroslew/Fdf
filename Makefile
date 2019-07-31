@@ -10,6 +10,7 @@ OBJ =   ./main.o \
         ./record_map.o\
         ./draw.o\
         ./color.o\
+        ./output.o\
 
 all: $(NAME) $(LIB)
 

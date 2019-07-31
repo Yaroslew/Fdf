@@ -108,22 +108,21 @@ static void	draw_line(t_base *base, t_map one, t_map two)
 
 void		draw_map(t_base *base)
 {
-	int		q;
-	int 	lenLine;
-
-	q = 0;
-	lenLine = base->size_map[0];
-	while (q < base->size_map[0] * base->size_map[1])
-	{
-		while (q < lenLine)
-		{
-			draw_line(base, base->mapDraw[q], base->mapDraw[q + 1]);
-			if (q < base->size_map[0] * (base->size_map[1] - 1))
-				draw_line(base, base->mapDraw[q], base->mapDraw[q +
-																base->size_map[0]]);
-			q++;
-		}
-		lenLine += base->size_map[0];
-		q++;
-	}
+//	int		q;
+//	int 	lenLine;
+//
+//	q = 0;
+//	lenLine = base->size_map[0];
+//	while (q < base->size_map[0] * base->size_map[1])
+//	{
+//		while (q < lenLine - 1)
+//		{
+//			draw_line(base, base->mapDraw[q], base->mapDraw[q + 1]);
+//			if (q < (base->size_map[0] * (base->size_map[1]) - base->size_map[0]))
+//				draw_line(base, base->mapDraw[q], base->mapDraw[q + base->size_map[0]]);
+//			q++;
+//		}
+//		lenLine += base->size_map[0];
+//		q++;
+//	}
 }
