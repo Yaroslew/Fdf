@@ -130,9 +130,4 @@ void		draw_map(t_base *base)
 
 	draw_line(base, base->mapDraw[0], base->mapDraw[1]);
 	draw_line(base, base->mapDraw[0], base->mapDraw[base->size_map[0]]);
-//
-//	ft_printf("%d %d\n",base->mapDraw[0].x, base->mapDraw[0].y );
-//	ft_printf("%d %d\n",base->mapDraw[base->size_map[0] * (base->size_map[1]- 1)].x, base->mapDraw[base->size_map[0] * (base->size_map[1] - 1)].y );
-//	draw_line(base, base->mapDraw[0], base->mapDraw[(base->size_map[0] * base->size_map[1])- 1]);
-	//draw_line(base, base->mapDraw[1], base->mapDraw[1 + base->size_map[0]]);
 }
