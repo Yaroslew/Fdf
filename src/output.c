@@ -17,8 +17,9 @@ void			stdOutput(t_base *base)
 	int			q;
 
 	q = 0;
-	if ((base->mapDraw = malloc(sizeof(t_map) * (base->size_map[0] * base->size_map[1]))))
-			mess_err(0); // исправить номер ошибки
+	ft_printf("\n%d        %d\n",base->size_map[0], base->size_map[1]);
+	if (!(base->mapDraw = malloc(sizeof(t_map) * (base->size_map[0] * base->size_map[1]))))
+			mess_err(0);
 	while (q < base->size_map[0] * base->size_map[1])
 	{
 		base->mapDraw[q].x = base->map[q].x;

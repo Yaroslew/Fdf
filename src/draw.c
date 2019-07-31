@@ -56,7 +56,8 @@ static void	stepX(t_base *base)
 		error += base->lineDraw->stepErr;
 		if (2 * error >= base->lineDraw->deltaX)
 		{
-			one.y < two.y ? one.y++ : one.y--;
+			if (one.y != two.y)
+				one.y < two.y ? one.y++ : one.y--;
 			error -= base->lineDraw->deltaX;
 		}
 		one.x += base->lineDraw->diry;
@@ -82,7 +83,8 @@ static void	stepY(t_base *base)
 		error += base->lineDraw->stepErr;
 		if (2 * error >= base->lineDraw->deltaY)
 		{
-			one.x < two.x ? one.x++ : one.x--;
+			if (one.x != two.x)
+				one.x < two.x ? one.x++ : one.x--;
 			error -= base->lineDraw->deltaY;
 		}
 		one.y += base->lineDraw->diry;
@@ -109,25 +111,25 @@ static void	draw_line(t_base *base, t_map one, t_map two)
 
 void		draw_map(t_base *base)
 {
-//	int		q;
-//	int 	lenLine;
-//
-//	q = 0;
-//	lenLine = base->size_map[0];
-//	while (q < base->size_map[0] * base->size_map[1])
-//	{
-//		while (q < lenLine - 1)
-//		{
-//			draw_line(base, base->mapDraw[q], base->mapDraw[q + 1]);
-//			if (q < (base->size_map[0] * (base->size_map[1]) - base->size_map[0]))
-//				draw_line(base, base->mapDraw[q], base->mapDraw[q + base->size_map[0]]);
-//			q++;
-//		}
-//		lenLine += base->size_map[0];
-//		q++;
-//	}
+	int		q;
+	int 	lenLine;
+
+	q = 0;
+	lenLine = base->size_map[0];
+	while (q < base->size_map[0] * base->size_map[1] - 1)
+	{
+		while (q < lenLine - 1)
+		{
+			//draw_line(base, base->mapDraw[q], base->mapDraw[q + 1]);
+			if (q < (base->size_map[0] * (base->size_map[1]) - base->size_map[0]))
+				draw_line(base, base->mapDraw[q], base->mapDraw[q + base->size_map[0] + 1]);
+			q++;
+		}
+		lenLine += base->size_map[0];
+		q++;
+	}
 
 
-	draw_line(base, base->mapDraw[0], base->mapDraw[1]);
-	draw_line(base, base->mapDraw[0], base->mapDraw[base->size_map[0]]);
+	// draw_line(base, base->mapDraw[0], base->mapDraw[1]);
+	// draw_line(base, base->mapDraw[0], base->mapDraw[base->size_map[0]]);
 }

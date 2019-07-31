@@ -39,7 +39,7 @@ $(NAME):
 		@gcc \
 		$(LFT)/libftprintf.a $(MLX)/libmlx.a \
 		-lmlx -framework OpenGL -framework AppKit \
-		-I $(HEAD) $(OBG) -o $(NAME)
+		-I $(HEAD) $(OBG) -o $(NAME) 
 		@echo Compiled $(NAME)!
 
 clean:
