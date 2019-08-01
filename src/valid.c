@@ -59,7 +59,6 @@ static void check_str(int fd, t_base *base)
 		ver = 0;
 		base->size_map[1]++;
 		q = 0;
-		ft_printf("%s\n", line); // распечатка карты DELETED
 		while(line[q])
 		{
 			if ((line[q] < '0' || line[q] > '9') && line[q] != ' ' &&
@@ -73,7 +72,6 @@ static void check_str(int fd, t_base *base)
 			q++;
 		}
 		ver = check_ver(ver, base);
-	//	ft_printf("\b*Конец стоки*\n");
 	}
 }
 
