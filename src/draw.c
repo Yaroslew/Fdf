@@ -133,8 +133,4 @@ void		draw_map(t_base *base)
 		lenLine += base->size_map[0];
 		q++;
 	}
-
-
-	// draw_line(base, base->mapDraw[0], base->mapDraw[1]);
-	// draw_line(base, base->mapDraw[0], base->mapDraw[base->size_map[0]]);
 }

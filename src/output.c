@@ -10,13 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdfHeader.h"
+#include "../includes/fdfHeader.h"
 
 void			stdOutput(t_base *base)
 {
 	int			q;
 
 	q = 0;
+	base->lineDraw->posCenterHor = (base->win_hor - (base->size_map[0] * base->scale)) / 2;
+	base->lineDraw->posCenterVer = (base->win_ver - (base->size_map[1] * base->scale)) / 2;
 	if (!(base->mapDraw = malloc(sizeof(t_map) * (base->size_map[0] * base->size_map[1]))))
 			mess_err(0);
 	while (q < base->size_map[0] * base->size_map[1])
