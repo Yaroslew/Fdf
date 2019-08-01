@@ -99,6 +99,8 @@ static void	draw_line(t_base *base, t_map one, t_map two)
 	base->lineDraw->one = one;
 	base->lineDraw->start = one;
 	base->lineDraw->two = two;
+	base->lineDraw->deltaX = 0;
+	base->lineDraw->deltaY = 0;
 	one.x > two.x ? (base->lineDraw->deltaX = one.x - two.x) : 0;
 	one.x < two.x ? (base->lineDraw->deltaX = two.x - one.x) : 0;
 	one.y > two.y ? (base->lineDraw->deltaY = one.y - two.y) : 0;
@@ -116,21 +118,23 @@ void		draw_map(t_base *base)
 
 	q = 0;
 	lenLine = base->size_map[0];
-	ft_printf("%d %d\n", base->size_map[0], base->size_map[1]);
+	// ft_printf("%d %d\n", base->size_map[0], base->size_map[1]);
 	while (q < base->size_map[0] * base->size_map[1] - 1)
 	{
-		while (q < lenLine - 1)
+		while (q < lenLine)
 		{
-			draw_line(base, base->mapDraw[q], base->mapDraw[q + 1]);
+		//	ft_printf("%d", q );
+			if (q < lenLine - 1)
+				draw_line(base, base->mapDraw[q], base->mapDraw[q + 1]);
 			if (q < (base->size_map[0] * (base->size_map[1]) - base->size_map[0]))
-				draw_line(base, base->mapDraw[q], base->mapDraw[q + base->size_map[0] + 1]);
-// в файле длина строки 19!!!!
-// а показывает тут, что 18!
-// НО! Это ошибка валидатора(там считается размер карты), исключительно при юзании карты 42. Все остальные карты он
-// читает правильно. В чем прикол?!
+				draw_line(base, base->mapDraw[q], base->mapDraw[q + base->size_map[0]]);
+/* в файле длина строки 19!!!! а показывает тут, что 18!
+НО! Это ошибка валидатора(там считается размер карты), исключительно при юзании карты 42.
+Все остальные карты он читает правильно. В чем прикол?! 
+			+++++++++++++++++++++++++++++++++++++++++++++ Потрачено */
 			q++;
 		}
 		lenLine += base->size_map[0];
-		q++;
+		ft_printf("\n");
 	}
 }

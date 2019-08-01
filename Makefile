@@ -31,7 +31,7 @@ $(NAME):
 
 		@mkdir obj
 		@make -C $(LFT) re
-		@make -C $(MLX) re
+		# @make -C $(MLX) re
 		@gcc \
 		-I $(HEAD) \
 		-c $(SRC)
@@ -41,7 +41,13 @@ $(NAME):
 		-lmlx -framework OpenGL -framework AppKit \
 		-I $(HEAD) $(OBG) -o $(NAME) 
 		@echo Compiled $(NAME)!
+		# dont forget about FLAG COMPILE
 
+# edit: $(OBJ)
+# 	@gcc -o $(OBJ)
+
+# %.o: %.c $(INCL)
+	
 clean:
 		@rm -rf obj
 		@make -C $(LFT) fclean

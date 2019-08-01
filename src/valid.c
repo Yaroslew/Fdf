@@ -59,20 +59,24 @@ static void check_str(int fd, t_base *base)
 		ver = 0;
 		base->size_map[1]++;
 		q = 0;
+		// ft_printf("%d %d\n", base->size_map[0], base->size_map[1]);
+		// ft_printf("  %s   ", line);
 		while(line[q])
 		{
-			if ((line[q] < '0' || line[q] > '9') && line[q] != ' ' &&
+			if (( '0' > line[q] || line[q] > '9') && line[q] != ' ' &&
 				line[q] != '\t' && line[q] != '-' && line[q] != ',')
 				mess_err(3);
-			if ((line[q] > 47 && line[q] < 58) && (line[q + 1] && (line[q + 1] == ' ' ||
-			line[q + 1] == '\t' || line[q + 1] == ',' || line[q + 1] == '\0')))
-				ver++;
+			if (( '0' <= line[q] && line[q] <= '9') && 
+			(line[q + 1] == ' ' || line[q + 1] == '\t' ||
+						line[q + 1] == ',' || line[q + 1] == 0))
+				++ver;
 			if (line[q] == ',')
 				q = check_color(q, line);
-			q++;
+			++q;
 		}
 		ver = check_ver(ver, base);
 	}
+	ft_printf("%d %d\n", base->size_map[0], base->size_map[1]);
 }
 
 void valid(int ac, char *av, t_base *base)
