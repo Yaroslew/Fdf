@@ -21,12 +21,12 @@ void			stdOutput(t_base *base)
 	base->lineDraw->posCenterVer = (base->win_ver - (base->size_map[1] * base->scale)) / 2;
 	if (!(base->mapDraw = malloc(sizeof(t_map) * (base->size_map[0] * base->size_map[1]))))
 			mess_err(0);
-	while (q < base->size_map[0] * base->size_map[1])
+	while(q < base->size_map[0] * base->size_map[1])
 	{
-		base->mapDraw[q].x = base->map[q].x;
-		base->mapDraw[q].y = base->map[q].y;
+		base->mapDraw[q].x =(base->map[q].x - base->map[q].y) * cos(0.523599);
+		base->mapDraw[q].y = (-1 * base->map[q].z) + (base->map[q].x + base->map[q].y) * sin(0.523599);
+		base->mapDraw[q].color = base->standart_color;
 		base->mapDraw[q].z = base->map[q].z;
-		base->mapDraw[q].color = base->map[q].color;
 		q++;
 	}
 	draw_map(base);

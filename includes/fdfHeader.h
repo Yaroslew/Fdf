@@ -51,11 +51,14 @@ typedef struct	s_line
 typedef struct s_base
 {
 	int			size_map[2];
+
 	int			scale;
 	double		angle;
 	double		angleX;
 	double		angleY;
 	double		angleZ;
+	double		angleSlantingR;
+
 	int			standart_color;
 	t_map		*map;
 	t_map		*mapDraw;
@@ -76,9 +79,11 @@ void			record_map(char *argv, t_base *base);
 int				get_color(t_map current, t_map start, t_map end, int flag);
 void			draw_map(t_base *base);
 void			stdOutput(t_base *base);
+
 void			turnX(t_base *base, int flag);
 void			turnY(t_base *base, int flag);
 void			turnZ(t_base *base, int flag);
+void			slantingR(t_base *base, int flag);
 
 void			freeImage(t_base *base);
 

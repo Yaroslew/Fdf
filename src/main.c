@@ -26,6 +26,8 @@ static t_base *init_base(void)
 	base->angleX = 0;
 	base->angleY = 0;
 	base->angleZ = 0;
+	base->angleSlantingR = 0;
+
 	if(!(base->lineDraw = malloc(sizeof(t_line))))
 		mess_err(0);
 	return (base);
@@ -61,6 +63,11 @@ static int de_key(int key, t_base *base)
 		turnZ(base, 1);
 	if (key == 7)
 		turnZ(base, 0);
+	if (key == 18)
+		slantingR(base, 1);
+	if (key == 19)
+		slantingR(base, 0);
+
 
 	return (key);
 }
