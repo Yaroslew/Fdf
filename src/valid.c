@@ -59,8 +59,6 @@ static void check_str(int fd, t_base *base)
 		ver = 0;
 		base->size_map[1]++;
 		q = 0;
-		// ft_printf("%d %d\n", base->size_map[0], base->size_map[1]);
-		// ft_printf("  %s   ", line);
 		while(line[q])
 		{
 			if (( '0' > line[q] || line[q] > '9') && line[q] != ' ' &&
@@ -76,7 +74,6 @@ static void check_str(int fd, t_base *base)
 		}
 		ver = check_ver(ver, base);
 	}
-	ft_printf("%d %d\n", base->size_map[0], base->size_map[1]);
 }
 
 void valid(int ac, char *av, t_base *base)
