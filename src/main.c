@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdfHeader.h"
+#include "../includes/fdfHeader.h"
 
 static t_base *init_base(void)
 {
@@ -22,7 +22,10 @@ static t_base *init_base(void)
 	base->size_map[1] = 0;
 	base->scale = 10;
 	base->standart_color = 0xffffff;
-
+	base->angle = 0.1745;
+	base->angleX = 0;
+	base->angleY = 0;
+	base->angleZ = 0;
 	if(!(base->lineDraw = malloc(sizeof(t_line))))
 		mess_err(0);
 	return (base);
@@ -46,6 +49,18 @@ static int de_key(int key, t_base *base)
 {
 	if (key == 53)
 			exit(0);
+	if (key == 123)
+		turnY(base, 1);
+	if (key == 124)
+		turnY(base, 0);
+	if (key == 126)
+		turnX(base, 1);
+	if (key == 125)
+		turnX(base, 0);
+	if (key == 6)
+		turnZ(base, 1);
+	if (key == 7)
+		turnZ(base, 0);
 
 	return (key);
 }
