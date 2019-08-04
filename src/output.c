@@ -21,81 +21,77 @@ void			stdOutput(t_base *base)
 	base->lineDraw->posCenterVer = (base->win_ver - (base->size_map[1] * base->scale)) / 2;
 	if (!(base->mapDraw = malloc(sizeof(t_map) * (base->size_map[0] * base->size_map[1]))))
 			mess_err(0);
+	if (!(base->mapFl = malloc(sizeof(t_mapFl) * (base->size_map[0] * base->size_map[1]))))
+		mess_err(0);
 	while(q < base->size_map[0] * base->size_map[1])
 	{
-		base->mapDraw[q].x =(base->map[q].x - base->map[q].y) * cos(0.523599);
-		base->mapDraw[q].y = (base->map[q].x + base->map[q].y) * sin(0.523599) - base->map[q].z;
-		base->mapDraw[q].color = base->standart_color;
-		base->mapDraw[q].z = base->map[q].z;
-		base->map[q].x = base->mapDraw[q].x;
-		base->map[q].y = base->mapDraw[q].y;
-		base->map[q].z = base->mapDraw[q].z;
+		base->mapFl[q].x =(base->map[q].x - base->map[q].y) * cos(0.523599);
+		base->mapFl[q].y = (base->map[q].x + base->map[q].y) * sin(0.523599) - base->map[q].z;
+		base->mapFl[q].z = base->map[q].z;
 		q++;
 	}
-	draw_map(base);
-	mlx_put_image_to_window(base->mlx_ptr, base->win_ptr, base->img_ptr, 0, 0);
+	pre_draw(base);
 }
 
 void			turnX(t_base *base, int flag)
 {
 	int			q;
+	double		temp;
+	double		angle;
 
 	q = 0;
+	angle = base->angle;
 	if (flag)
-		base->angleX += base->angle;
-	else
-		base->angleX -= base->angle;
+		angle *= -1;
 	freeImage(base);
 	while (q < base->size_map[0] * base->size_map[1])
 	{
-		base->mapDraw[q].x = base->map[q].x;
-		base->mapDraw[q].y = (base->map[q].y * cos(base->angleX)) + (base->map[q].z * sin(base->angleX));
-		base->mapDraw[q].z = (base->map[q].y * sin(base->angleX)) + (base->map[q].z * cos(base->angleX));
+		temp = base->mapFl[q].y;
+		base->mapFl[q].y = base->mapFl[q].y * cos(angle) + base->mapFl[q].z * sin(angle);
+		base->mapFl[q].z = -temp * sin(angle) + base->mapFl[q].z * cos(angle);
 		q++;
 	}
-	draw_map(base);
-	mlx_put_image_to_window(base->mlx_ptr, base->win_ptr, base->img_ptr, 0, 0);
+	pre_draw(base);
 }
 
 void			turnY(t_base *base, int flag)
 {
 	int			q;
+	double		temp;
+	double		angle;
 
 	q = 0;
+	angle = base->angle;
 	if (flag)
-		base->angleY += base->angle;
-	else
-		base->angleY -= base->angle;
+		angle *= -1;
 	freeImage(base);
 	while (q < base->size_map[0] * base->size_map[1])
 	{
-		base->mapDraw[q].y = base->map[q].y;
-		base->mapDraw[q].x = (base->map[q].x * cos(base->angleY
-				)) + (base->map[q].z * sin(base->angleY));
-		base->mapDraw[q].z = (base->map[q].x * sin(base->angleY)) + (base->map[q].z * cos(base->angleY));
+		temp = base->mapFl[q].x;
+		base->mapFl[q].x = base->mapFl[q].x * cos(angle) + base->mapFl[q].z * sin(angle);
+		base->mapFl[q].z = -temp * sin(angle) + base->mapFl[q].z * cos(angle);
 		q++;
 	}
-	draw_map(base);
-	mlx_put_image_to_window(base->mlx_ptr, base->win_ptr, base->img_ptr, 0, 0);
+	pre_draw(base);
 }
 
 void			turnZ(t_base *base, int flag)
 {
 	int			q;
+	double		temp;
+	double		angle;
 
 	q = 0;
+	angle = base->angle;
 	if (flag)
-		base->angleZ += base->angle;
-	else
-		base->angleZ -= base->angle;
+		angle *= -1;
 	freeImage(base);
 	while (q < base->size_map[0] * base->size_map[1])
 	{
-		base->mapDraw[q].z = base->map[q].z;
-		base->mapDraw[q].x = (base->map[q].x * cos(base->angleZ)) - (base->map[q].y * sin(base->angleZ));
-		base->mapDraw[q].y = (base->map[q].x * sin(base->angleZ)) + (base->map[q].y * cos(base->angleZ));
+		temp = base->mapFl[q].x;
+		base->mapFl[q].x = base->mapFl[q].x * cos(angle) - base->mapFl[q].y * sin(angle);
+		base->mapFl[q].y = temp * sin(angle) + base->mapFl[q].y * cos(angle);
 		q++;
 	}
-	draw_map(base);
-	mlx_put_image_to_window(base->mlx_ptr, base->win_ptr, base->img_ptr, 0, 0);
+	pre_draw(base);
 }

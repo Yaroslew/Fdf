@@ -22,10 +22,7 @@ static t_base *init_base(void)
 	base->size_map[1] = 0;
 	base->scale = 10;
 	base->standart_color = 0xffffff;
-	base->angle = 0.1745;
-	base->angleX = 0;
-	base->angleY = 0;
-	base->angleZ = 0;
+	base->angle = M_PI / 18.0;
 	base->angleSlantingR = 0;
 
 	if(!(base->lineDraw = malloc(sizeof(t_line))))

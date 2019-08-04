@@ -14,7 +14,7 @@ NAME = fdf
 
 SRC = ./src/main.c ./src/valid.c ./src/message_errors.c ./src/record_map.c \
 		./src/draw.c ./src/color.c ./src/output.c ./src/image_operations.c \
-		./src/output_sec.c
+		./src/output_sec.c ./src/pre_draw.c
 
 HEAD = ./includes
 

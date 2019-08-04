@@ -28,6 +28,14 @@ typedef struct	s_map
 	int			z;
 	int			color;
 }				t_map;
+
+typedef struct	s_mapFl
+{
+	double			x;
+	double			y;
+	double			z;
+}				t_mapFl;
+
 /*
  * ---Draw line---
  */
@@ -54,14 +62,12 @@ typedef struct s_base
 
 	int			scale;
 	double		angle;
-	double		angleX;
-	double		angleY;
-	double		angleZ;
 	double		angleSlantingR;
 
 	int			standart_color;
 	t_map		*map;
 	t_map		*mapDraw;
+	t_mapFl		*mapFl;
 
 	void		*mlx_ptr;
 	void		*win_ptr;
@@ -86,6 +92,7 @@ void			turnZ(t_base *base, int flag);
 void			slantingR(t_base *base, int flag);
 
 void			freeImage(t_base *base);
+void			pre_draw(t_base *base);
 
 
 #endif
