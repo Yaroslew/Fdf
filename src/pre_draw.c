@@ -16,6 +16,8 @@ void	pre_draw(t_base *base)
 {
 	int q;
 
+	freeImage(base);
+	q = 0;
 	while (q < base->size_map[0] * base->size_map[1])
 	{
 		base->mapDraw[q].x = (int)(base->mapFl[q].x + 0.5);

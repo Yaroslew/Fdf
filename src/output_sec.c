@@ -31,3 +31,14 @@ void			slantingR(t_base *base, int flag)
 	draw_map(base);
 	mlx_put_image_to_window(base->mlx_ptr, base->win_ptr, base->img_ptr, 0, 0);
 }
+
+void		scale(t_base *base, int flag)
+{
+	int 		q;
+
+	q = 0;
+	while (q < base->size_map[0] * base->size_map[1])
+	{
+		base->mapDraw[q].x = base->mapFl[q].x;
+	}
+}

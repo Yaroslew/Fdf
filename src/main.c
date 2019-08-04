@@ -44,31 +44,6 @@ static void init_mlx_win(t_base *base)
 	base->data_img = (int *)mlx_get_data_addr(base->img_ptr, &depth, &size_line, &endian);
 }
 
-static int de_key(int key, t_base *base)
-{
-	if (key == 53)
-			exit(0);
-	if (key == 123)
-		turnY(base, 1);
-	if (key == 124)
-		turnY(base, 0);
-	if (key == 126)
-		turnX(base, 1);
-	if (key == 125)
-		turnX(base, 0);
-	if (key == 6)
-		turnZ(base, 1);
-	if (key == 7)
-		turnZ(base, 0);
-	if (key == 18)
-		slantingR(base, 1);
-	if (key == 19)
-		slantingR(base, 0);
-
-
-	return (key);
-}
-
 int main(int ar, char **av)
 {
 	t_base	*base;

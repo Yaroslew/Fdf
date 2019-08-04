@@ -53,9 +53,6 @@ typedef struct	s_line
 	float		stepErr;
 }				t_line;
 
-/*
- *  ---base_data---
- */
 typedef struct s_base
 {
 	int			size_map[2];
@@ -68,6 +65,8 @@ typedef struct s_base
 	t_map		*map;
 	t_map		*mapDraw;
 	t_mapFl		*mapFl;
+
+	int			flagParrProj;
 
 	void		*mlx_ptr;
 	void		*win_ptr;
@@ -93,6 +92,9 @@ void			slantingR(t_base *base, int flag);
 
 void			freeImage(t_base *base);
 void			pre_draw(t_base *base);
+void			parrProjection(t_base *base, int flag);
+void			exitMy(t_base *base, int flag);
+int				de_key(int key, t_base *base);
 
 
 #endif

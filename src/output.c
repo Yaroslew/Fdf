@@ -17,6 +17,7 @@ void			stdOutput(t_base *base)
 	int			q;
 
 	q = 0;
+	base->flagParrProj = 0;
 	base->lineDraw->posCenterHor = (base->win_hor - (base->size_map[0] * base->scale)) / 2;
 	base->lineDraw->posCenterVer = (base->win_ver - (base->size_map[1] * base->scale)) / 2;
 	if (!(base->mapDraw = malloc(sizeof(t_map) * (base->size_map[0] * base->size_map[1]))))
@@ -33,15 +34,41 @@ void			stdOutput(t_base *base)
 	pre_draw(base);
 }
 
+void			parrProjection(t_base *base, int flag)
+{
+	int			q;
+
+	q = 0;
+	if (base->flagParrProj)
+	{
+		stdOutput(base);
+		return;
+	}
+	freeImage(base);
+	base->flagParrProj = 1;
+	while (q < base->size_map[0] * base->size_map[1])
+	{
+		base->mapDraw[q].x = base->map[q].x;
+		base->mapDraw[q].y = base->map[q].y;
+		base->mapDraw[q].z = base->map[q].z;
+		base->mapDraw[q].color = base->map[q].color;
+		q++;
+	}
+	draw_map(base);
+	mlx_put_image_to_window(base->mlx_ptr, base->win_ptr, base->img_ptr, 0, 0);
+}
+
 void			turnX(t_base *base, int flag)
 {
 	int			q;
 	double		temp;
 	double		angle;
 
+	if (base->flagParrProj)
+		return;
 	q = 0;
 	angle = base->angle;
-	if (flag)
+	if (flag % 2 > 0)
 		angle *= -1;
 	freeImage(base);
 	while (q < base->size_map[0] * base->size_map[1])
@@ -60,11 +87,12 @@ void			turnY(t_base *base, int flag)
 	double		temp;
 	double		angle;
 
+	if (base->flagParrProj)
+		return;
 	q = 0;
 	angle = base->angle;
-	if (flag)
+	if (flag % 2 > 0)
 		angle *= -1;
-	freeImage(base);
 	while (q < base->size_map[0] * base->size_map[1])
 	{
 		temp = base->mapFl[q].x;
@@ -81,11 +109,12 @@ void			turnZ(t_base *base, int flag)
 	double		temp;
 	double		angle;
 
+	if (base->flagParrProj)
+		return;
 	q = 0;
 	angle = base->angle;
-	if (flag)
+	if (flag % 2 > 0)
 		angle *= -1;
-	freeImage(base);
 	while (q < base->size_map[0] * base->size_map[1])
 	{
 		temp = base->mapFl[q].x;
