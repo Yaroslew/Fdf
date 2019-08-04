@@ -95,6 +95,8 @@ void			pre_draw(t_base *base);
 void			parrProjection(t_base *base, int flag);
 void			exitMy(t_base *base, int flag);
 int				de_key(int key, t_base *base);
+void			scale(t_base *base, int flag);
+void			color_draw(t_base *base, int flag);
 
 
 #endif

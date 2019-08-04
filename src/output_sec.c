@@ -35,15 +35,34 @@ void			slantingR(t_base *base, int flag)
 void		scale(t_base *base, int flag)
 {
 	int 		q;
+	double		scale;
+
+	if (flag % 2 == 0)
+		scale = 1.25;
+	else
+		scale = 0.75;
+	q = 0;
+	while (q < base->size_map[0] * base->size_map[1])
+	{
+		base->mapFl[q].x *= scale;
+		base->mapFl[q].y *= scale;
+		base->mapFl[q].z *= scale;
+		q++;
+	}
+	pre_draw(base);
+	mlx_put_image_to_window(base->mlx_ptr, base->win_ptr, base->img_ptr, 0, 0);
+}
+
+void	color_draw(t_base *base, int flag)
+{
+	int	q;
 
 	q = 0;
-	if (base->flagParrProj)
+	while (q < base->size_map[0] * base->size_map[1])
 	{
-
+		if (base->map[q].z > 0)
+			base->mapDraw[q].color = 0xFF0000;
+		q++;
 	}
-	else
-	{
-
-	}
-
+	pre_draw(base);
 }

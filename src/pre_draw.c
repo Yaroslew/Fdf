@@ -23,7 +23,6 @@ void	pre_draw(t_base *base)
 		base->mapDraw[q].x = (int)(base->mapFl[q].x + 0.5);
 		base->mapDraw[q].y = (int)(base->mapFl[q].y + 0.5);
 		base->mapDraw[q].z = (int)(base->mapFl[q].z + 0.5);
-		base->mapDraw[q].color = base->map[q].color;
 		q++;
 	}
 	draw_map(base);

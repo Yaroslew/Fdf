@@ -29,6 +29,7 @@ void			stdOutput(t_base *base)
 		base->mapFl[q].x =(base->map[q].x - base->map[q].y) * cos(0.523599);
 		base->mapFl[q].y = (base->map[q].x + base->map[q].y) * sin(0.523599) - base->map[q].z;
 		base->mapFl[q].z = base->map[q].z;
+		base->mapDraw[q].color = base->map[q].color;
 		q++;
 	}
 	pre_draw(base);
