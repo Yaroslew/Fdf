@@ -12,38 +12,32 @@
 
 #include "../includes/fdfHeader.h"
 
-void			slantingR(t_base *base, int flag)
-{
-	int			q;
+typedef void	(*dispatch)(t_base *base, int key);
 
-	q = 0;
-	if (flag)
-		base->angleSlantingR += base->angle;
-	else
-		base->angleSlantingR -= base->angle;
-	freeImage(base);
-	while (q < base->size_map[0] * base->size_map[1])
-	{
-		base->mapDraw[q].x = (base->map[q].x + base->map[q].y) * cos(base->angle);
-		base->mapDraw[q].y = (base->map[q].x - base->map[q].y) * sin(base->angle) - base->map[q].z;
-		q++;
-	}
-	draw_map(base);
-	mlx_put_image_to_window(base->mlx_ptr, base->win_ptr, base->img_ptr, 0, 0);
+static	dispatch const r_dispatch[269] =
+		{
+				[53] = exitMy,
+				[126] = turnX,
+				[125] = turnX,
+				[6] = turnZ,
+				[7] = turnZ,
+				[123] = turnY,
+				[124] = turnY,
+				[12] = slantingR,
+				[13] = slantingR,
+				[48] = parrProjection,
+
+		};
+
+int de_key(int key, t_base *base)
+{
+	if (key == 53 || key == 126 || key == 125 || key == 6 || key == 7 ||
+	key == 123 || key == 124 || key == 12 || key == 13 || key == 48)
+		r_dispatch[key](base, key);
+	return (key);
 }
 
-void		scale(t_base *base, int flag)
+void	exitMy(t_base *base, int flag)
 {
-	int 		q;
-
-	q = 0;
-	if (base->flagParrProj)
-	{
-
-	}
-	else
-	{
-
-	}
-
+	exit(0);
 }
