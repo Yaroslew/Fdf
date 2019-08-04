@@ -36,19 +36,19 @@ $(NAME):
 		@gcc \
 		-I $(HEAD) \
 		-c $(SRC)
-		@mv *.o obj/	
+		@mv *.o obj/
 		@gcc \
 		$(LFT)/libftprintf.a $(MLX)/libmlx.a \
 		-lmlx -framework OpenGL -framework AppKit \
-		-I $(HEAD) $(OBG) -o $(NAME) 
+		-I $(HEAD) $(OBG) -o $(NAME)
 		@echo Compiled $(NAME)!
 		# dont forget about FLAG COMPILE
 
 # edit: $(OBJ)
 # 	@gcc -o $(OBJ)
 
-# %.o: %.c $(INCL)
-	
+#%.o: %.c $(INCL)
+
 clean:
 		@rm -rf obj
 		@make -C $(LFT) fclean

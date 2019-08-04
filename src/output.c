@@ -24,9 +24,12 @@ void			stdOutput(t_base *base)
 	while(q < base->size_map[0] * base->size_map[1])
 	{
 		base->mapDraw[q].x =(base->map[q].x - base->map[q].y) * cos(0.523599);
-		base->mapDraw[q].y = (-1 * base->map[q].z) + (base->map[q].x + base->map[q].y) * sin(0.523599);
+		base->mapDraw[q].y = (base->map[q].x + base->map[q].y) * sin(0.523599) - base->map[q].z;
 		base->mapDraw[q].color = base->standart_color;
 		base->mapDraw[q].z = base->map[q].z;
+		base->map[q].x = base->mapDraw[q].x;
+		base->map[q].y = base->mapDraw[q].y;
+		base->map[q].z = base->mapDraw[q].z;
 		q++;
 	}
 	draw_map(base);
@@ -67,7 +70,8 @@ void			turnY(t_base *base, int flag)
 	while (q < base->size_map[0] * base->size_map[1])
 	{
 		base->mapDraw[q].y = base->map[q].y;
-		base->mapDraw[q].x = (base->map[q].x * cos(base->angleY)) + (base->map[q].z * sin(base->angleY));
+		base->mapDraw[q].x = (base->map[q].x * cos(base->angleY
+				)) + (base->map[q].z * sin(base->angleY));
 		base->mapDraw[q].z = (base->map[q].x * sin(base->angleY)) + (base->map[q].z * cos(base->angleY));
 		q++;
 	}
