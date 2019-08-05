@@ -12,26 +12,6 @@
 
 #include "../includes/fdfHeader.h"
 
-void			slantingR(t_base *base, int flag)
-{
-	int			q;
-
-	q = 0;
-	if (flag)
-		base->angleSlantingR += base->angle;
-	else
-		base->angleSlantingR -= base->angle;
-	freeImage(base);
-	while (q < base->size_map[0] * base->size_map[1])
-	{
-		base->mapDraw[q].x = (base->map[q].x + base->map[q].y) * cos(base->angle);
-		base->mapDraw[q].y = (base->map[q].x - base->map[q].y) * sin(base->angle) - base->map[q].z;
-		q++;
-	}
-	draw_map(base);
-	mlx_put_image_to_window(base->mlx_ptr, base->win_ptr, base->img_ptr, 0, 0);
-}
-
 void		scale(t_base *base, int flag)
 {
 	int 		q;
@@ -49,6 +29,7 @@ void		scale(t_base *base, int flag)
 		base->mapFl[q].z *= scale;
 		q++;
 	}
+
 	pre_draw(base);
 	mlx_put_image_to_window(base->mlx_ptr, base->win_ptr, base->img_ptr, 0, 0);
 }
@@ -58,11 +39,74 @@ void	color_draw(t_base *base, int flag)
 	int	q;
 
 	q = 0;
+	if (base->flagParrProj)
+		return;
+	if (!base->flagColor)
+	{
+		while (q < base->size_map[0] * base->size_map[1])
+		{
+			if (base->map[q].z > 0)
+			{
+				if (flag == 18)
+					base->mapDraw[q].color = 0xFF0000;
+				if (flag == 19)
+					base->mapDraw[q].color = 0x00FF00;
+				if (flag == 20)
+					base->mapDraw[q].color = 0x0000FF;
+			}
+			q++;
+		}
+		base->flagColor = 1;
+	}
+	else
+	{
+		while (q < base->size_map[0] * base->size_map[1])
+		{
+			if (base->map[q].z > 0)
+				base->mapDraw[q].color = base->map[q].color;
+			q++;
+		}
+		base->flagColor = 0;
+	}
+	pre_draw(base);
+}
+
+void	moveX(t_base *base, int flag)
+{
+	int		q;
+	int 	step;
+
+	q = 0;
+	step = 5;
+	if (base->flagParrProj)
+		return;
+	if (flag == 0)
+		step = -5;
 	while (q < base->size_map[0] * base->size_map[1])
 	{
-		if (base->map[q].z > 0)
-			base->mapDraw[q].color = 0xFF0000;
+		base->mapFl[q].x += step;
 		q++;
 	}
 	pre_draw(base);
+	mlx_put_image_to_window(base->mlx_ptr, base->win_ptr, base->img_ptr, 0, 0);
+}
+
+void	moveY(t_base *base, int flag)
+{
+	int		q;
+	int 	step;
+
+	q = 0;
+	step = 5;
+	if (base->flagParrProj)
+		return;
+	if (flag == 13)
+		step = -5;
+	while (q < base->size_map[0] * base->size_map[1])
+	{
+		base->mapFl[q].y += step;
+		q++;
+	}
+	pre_draw(base);
+	mlx_put_image_to_window(base->mlx_ptr, base->win_ptr, base->img_ptr, 0, 0);
 }

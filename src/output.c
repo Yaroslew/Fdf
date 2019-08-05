@@ -92,7 +92,7 @@ void			turnY(t_base *base, int flag)
 		return;
 	q = 0;
 	angle = base->angle;
-	if (flag % 2 > 0)
+	if (flag % 2 == 0)
 		angle *= -1;
 	while (q < base->size_map[0] * base->size_map[1])
 	{

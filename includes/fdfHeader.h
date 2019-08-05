@@ -67,6 +67,7 @@ typedef struct s_base
 	t_mapFl		*mapFl;
 
 	int			flagParrProj;
+	int			flagColor;
 
 	void		*mlx_ptr;
 	void		*win_ptr;
@@ -97,6 +98,8 @@ void			exitMy(t_base *base, int flag);
 int				de_key(int key, t_base *base);
 void			scale(t_base *base, int flag);
 void			color_draw(t_base *base, int flag);
+void			moveX(t_base *base, int flag);
+void			moveY(t_base *base, int flag);
 
 
 #endif

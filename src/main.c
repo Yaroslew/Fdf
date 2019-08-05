@@ -24,6 +24,7 @@ static t_base *init_base(void)
 	base->standart_color = 0xffffff;
 	base->angle = M_PI / 18.0;
 	base->angleSlantingR = 0;
+	base->flagColor = 0;
 
 	if(!(base->lineDraw = malloc(sizeof(t_line))))
 		mess_err(0);
@@ -53,8 +54,7 @@ int main(int ar, char **av)
 	record_map(av[1], base);
 	init_mlx_win(base);
 	stdOutput(base);
-
-	mlx_key_hook(base->win_ptr, de_key, (t_base*)(base));
+	mlx_hook(base->win_ptr, 2, 0, de_key, base);
 	mlx_loop(base->mlx_ptr);
 }
 
