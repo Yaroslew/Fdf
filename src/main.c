@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdfHeader.h"
+#include "../includes/fdfheader.h"
 
-static t_base *init_base(void)
+static t_base	*init_base(void)
 {
-	t_base *base;
+	t_base		*base;
 
 	if (!(base = malloc(sizeof(t_base) * 1)))
 		mess_err(0);
@@ -23,38 +23,37 @@ static t_base *init_base(void)
 	base->scale = 10;
 	base->standart_color = 0xffffff;
 	base->angle = M_PI / 18.0;
-	base->angleSlantingR = 0;
-	base->flagColor = 0;
-
-	if(!(base->lineDraw = malloc(sizeof(t_line))))
+	base->flagcolor = 0;
+	if (!(base->linedraw = malloc(sizeof(t_line))))
 		mess_err(0);
 	return (base);
 }
 
-static void init_mlx_win(t_base *base)
+static void		init_mlx_win(t_base *base)
 {
-	int		endian;
-	int		depth;
-	int		size_line;
+	int			endian;
+	int			depth;
+	int			size_line;
 
 	base->win_hor = 1000;
 	base->win_ver = 1000;
 	base->mlx_ptr = mlx_init();
-	base->win_ptr = mlx_new_window(base->mlx_ptr, base->win_hor, base->win_ver, "Fdf");
+	base->win_ptr = mlx_new_window(base->mlx_ptr,
+			base->win_hor, base->win_ver, "Fdf");
 	base->img_ptr = mlx_new_image(base->mlx_ptr, base->win_hor, base->win_ver);
-	base->data_img = (int *)mlx_get_data_addr(base->img_ptr, &depth, &size_line, &endian);
+	base->data_img = (int *)mlx_get_data_addr(base->img_ptr,
+			&depth, &size_line, &endian);
 }
 
-int main(int ar, char **av)
+int				main(int ar, char **av)
 {
-	t_base	*base;
+	t_base		*base;
 
 	base = init_base();
 	valid(ar, av[1], base);
 	record_map(av[1], base);
 	init_mlx_win(base);
-	stdOutput(base);
+	stdoutput(base);
 	mlx_hook(base->win_ptr, 2, 0, de_key, base);
 	mlx_loop(base->mlx_ptr);
 }
-

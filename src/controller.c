@@ -10,42 +10,43 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdfHeader.h"
+#include "../includes/fdfheader.h"
 
-typedef void	(*dispatch)(t_base *base, int key);
+typedef void	(*t_dispatch)(t_base *base, int key);
 
-static	dispatch const r_dispatch[269] =
-		{
-			[53] = exitMy,
-			[126] = turnX,
-			[125] = turnX,
-			[27] = scale,
-			[24] = scale,
-			[6] = turnZ,
-			[7] = turnZ,
-			[123] = turnY,
-			[124] = turnY,
-			[48] = parrProjection,
-			[18] = color_draw,
-			[19] = color_draw,
-			[20] = color_draw,
-			[0] = moveX,
-			[2] = moveX,
-			[13] = moveY,
-			[1] = moveY,
-		};
+static			t_dispatch const g_dispatch[269] =
+{
+	[53] = exitmy,
+	[126] = turnx,
+	[125] = turnx,
+	[27] = scale,
+	[24] = scale,
+	[6] = turnz,
+	[7] = turnz,
+	[123] = turny,
+	[124] = turny,
+	[48] = parrprojection,
+	[18] = color_draw,
+	[19] = color_draw,
+	[20] = color_draw,
+	[0] = movex,
+	[2] = movex,
+	[13] = movey,
+	[1] = movey,
+};
 
-int de_key(int key, t_base *base)
+int				de_key(int key, t_base *base)
 {
 	if (key == 53 || key == 126 || key == 125 || key == 6 || key == 7 ||
 	key == 123 || key == 124 || key == 12 || key == 13 || key == 48 ||
 	key == 4 || key == 5 || key == 27 || key == 24 || key == 2 ||
 	key == 0 || key == 1 || key == 18 || key == 19 || key == 20)
-		r_dispatch[key](base, key);
+		g_dispatch[key](base, key);
 	return (key);
 }
 
-void	exitMy(t_base *base, int flag)
+void			exitmy(t_base *base, int flag)
 {
+	ft_printf("Выход\n");
 	exit(0);
 }

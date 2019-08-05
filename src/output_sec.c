@@ -10,13 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdfHeader.h"
+#include "../includes/fdfheader.h"
 
-void		scale(t_base *base, int flag)
+void			scale(t_base *base, int flag)
 {
-	int 		q;
+	int			q;
 	double		scale;
 
+	if (base->flagparrproj)
+		return ;
 	if (flag % 2 == 0)
 		scale = 1.25;
 	else
@@ -24,87 +26,92 @@ void		scale(t_base *base, int flag)
 	q = 0;
 	while (q < base->size_map[0] * base->size_map[1])
 	{
-		base->mapFl[q].x *= scale;
-		base->mapFl[q].y *= scale;
-		base->mapFl[q].z *= scale;
+		base->mapfl[q].x *= scale;
+		base->mapfl[q].y *= scale;
+		base->mapfl[q].z *= scale;
 		q++;
 	}
-
 	pre_draw(base);
 	mlx_put_image_to_window(base->mlx_ptr, base->win_ptr, base->img_ptr, 0, 0);
 }
 
-void	color_draw(t_base *base, int flag)
+static void		color_draw_sec(t_base *base)
 {
-	int	q;
+	int			q;
 
 	q = 0;
-	if (base->flagParrProj)
-		return;
-	if (!base->flagColor)
+	while (q < base->size_map[0] * base->size_map[1])
+	{
+		if (base->map[q].z > 0)
+			base->mapdraw[q].color = base->map[q].color;
+		q++;
+	}
+	base->flagcolor = 0;
+}
+
+void			color_draw(t_base *base, int flag)
+{
+	int			q;
+
+	q = 0;
+	if (base->flagparrproj)
+		return ;
+	if (!base->flagcolor)
 	{
 		while (q < base->size_map[0] * base->size_map[1])
 		{
 			if (base->map[q].z > 0)
 			{
 				if (flag == 18)
-					base->mapDraw[q].color = 0xFF0000;
+					base->mapdraw[q].color = 0xFF0000;
 				if (flag == 19)
-					base->mapDraw[q].color = 0x00FF00;
+					base->mapdraw[q].color = 0x00FF00;
 				if (flag == 20)
-					base->mapDraw[q].color = 0x0000FF;
+					base->mapdraw[q].color = 0x0000FF;
 			}
 			q++;
 		}
-		base->flagColor = 1;
+		base->flagcolor = 1;
 	}
 	else
-	{
-		while (q < base->size_map[0] * base->size_map[1])
-		{
-			if (base->map[q].z > 0)
-				base->mapDraw[q].color = base->map[q].color;
-			q++;
-		}
-		base->flagColor = 0;
-	}
+		color_draw_sec(base);
 	pre_draw(base);
 }
 
-void	moveX(t_base *base, int flag)
+void			movex(t_base *base, int flag)
 {
-	int		q;
-	int 	step;
+	int			q;
+	int			step;
 
 	q = 0;
 	step = 5;
-	if (base->flagParrProj)
-		return;
+	if (base->flagparrproj)
+		return ;
 	if (flag == 0)
 		step = -5;
 	while (q < base->size_map[0] * base->size_map[1])
 	{
-		base->mapFl[q].x += step;
+		base->mapfl[q].x += step;
 		q++;
 	}
 	pre_draw(base);
 	mlx_put_image_to_window(base->mlx_ptr, base->win_ptr, base->img_ptr, 0, 0);
 }
 
-void	moveY(t_base *base, int flag)
+void			movey(t_base *base, int flag)
 {
-	int		q;
-	int 	step;
+	int			q;
+	int			step;
 
 	q = 0;
 	step = 5;
-	if (base->flagParrProj)
-		return;
+	if (base->flagparrproj)
+		return ;
 	if (flag == 13)
 		step = -5;
 	while (q < base->size_map[0] * base->size_map[1])
 	{
-		base->mapFl[q].y += step;
+		base->mapfl[q].y += step;
 		q++;
 	}
 	pre_draw(base);

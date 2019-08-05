@@ -10,28 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdfHeader.h"
+#include "../includes/fdfheader.h"
 
-static void	free_arr(char ***arr)
-{
-	int		q;
-	char	**temp;
-
-	temp = *arr;
-	q = 0;
-	while (temp[q])
-	{
-		free(temp[q]);
-		q++;
-	}
-	**arr = NULL;
-}
-
-static int symbol(int flag, char base)
+static int	symbol(int flag, char base)
 {
 	char	a;
-	char 	ab;
-	int 	res;
+	char	ab;
+	int		res;
 
 	res = 10;
 	a = 'A';
@@ -65,7 +50,6 @@ static int	write_color(char *arr)
 	r = 0;
 	q = 2;
 	res = 0;
-
 	while (arr[q])
 	{
 		if (arr[q] > 64 && arr[q] < 71)
@@ -138,7 +122,8 @@ void		record_map(char *argv, t_base *base)
 	fd = open(argv, O_RDONLY);
 	if (fd < 3)
 		mess_err(2);
-	if (!(base->map = malloc(sizeof(t_map) * (base->size_map[0] * base->size_map[1]))))
+	if (!(base->map = malloc(sizeof(t_map) *
+		(base->size_map[0] * base->size_map[1]))))
 		mess_err(0);
 	write_line(base->map, fd, base->size_map, base);
 	close(fd);

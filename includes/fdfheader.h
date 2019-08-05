@@ -11,16 +11,13 @@
 /* ************************************************************************** */
 
 #ifndef FDF_FDFHEADER_H
-#define FDF_FDFHEADER_H
+# define FDF_FDFHEADER_H
 
 # include "../libft/includes/libft.h"
 # include <math.h>
 # include <mlx.h>
 # include <fcntl.h>
 
-/*
- *  ---writed_map---
- */
 typedef struct	s_map
 {
 	int			x;
@@ -29,41 +26,39 @@ typedef struct	s_map
 	int			color;
 }				t_map;
 
-typedef struct	s_mapFl
+typedef struct	s_mapfl
 {
 	double			x;
 	double			y;
 	double			z;
-}				t_mapFl;
+}				t_mapfl;
 
 typedef struct	s_line
 {
 	t_map		one;
 	t_map		two;
 	t_map		start;
-	int			posCenterVer;
-	int			posCenterHor;
-	int			deltaX;
-	int			deltaY;
+	int			poscenterver;
+	int			poscenterhor;
+	int			deltax;
+	int			deltay;
 	int			diry;
-	float		stepErr;
+	float		steperr;
+	float		er;
 }				t_line;
 
-typedef struct s_base
+typedef struct	s_base
 {
 	int			size_map[2];
-
 	int			scale;
 	double		angle;
-	double		angleSlantingR;
-
 	int			standart_color;
 	t_map		*map;
-	t_map		*mapDraw;
-	t_mapFl		*mapFl;
+	t_map		*mapdraw;
+	t_mapfl		*mapfl;
 
-	int			flagParrProj;
-	int			flagColor;
+	int			flagparrproj;
+	int			flagcolor;
 
 	void		*mlx_ptr;
 	void		*win_ptr;
@@ -72,7 +67,7 @@ typedef struct s_base
 	int			win_ver;
 	int			*data_img;
 
-	t_line		*lineDraw;
+	t_line		*linedraw;
 }				t_base;
 
 void			mess_err(int a);
@@ -80,22 +75,19 @@ void			valid(int ac, char *av, t_base *base);
 void			record_map(char *argv, t_base *base);
 int				get_color(t_map current, t_map start, t_map end, int flag);
 void			draw_map(t_base *base);
-void			stdOutput(t_base *base);
-
-void			turnX(t_base *base, int flag);
-void			turnY(t_base *base, int flag);
-void			turnZ(t_base *base, int flag);
-void			slantingR(t_base *base, int flag);
-
-void			freeImage(t_base *base);
+void			stdoutput(t_base *base);
+void			turnx(t_base *base, int flag);
+void			turny(t_base *base, int flag);
+void			turnz(t_base *base, int flag);
+void			freeimage(t_base *base);
 void			pre_draw(t_base *base);
-void			parrProjection(t_base *base, int flag);
-void			exitMy(t_base *base, int flag);
+void			parrprojection(t_base *base, int flag);
+void			exitmy(t_base *base, int flag);
 int				de_key(int key, t_base *base);
 void			scale(t_base *base, int flag);
 void			color_draw(t_base *base, int flag);
-void			moveX(t_base *base, int flag);
-void			moveY(t_base *base, int flag);
-
+void			movex(t_base *base, int flag);
+void			movey(t_base *base, int flag);
+void			free_arr(char ***arr);
 
 #endif

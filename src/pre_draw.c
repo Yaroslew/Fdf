@@ -10,19 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdfHeader.h"
+#include "../includes/fdfheader.h"
 
 void	pre_draw(t_base *base)
 {
 	int q;
 
-	freeImage(base);
+	freeimage(base);
 	q = 0;
 	while (q < base->size_map[0] * base->size_map[1])
 	{
-		base->mapDraw[q].x = (int)(base->mapFl[q].x + 0.5);
-		base->mapDraw[q].y = (int)(base->mapFl[q].y + 0.5);
-		base->mapDraw[q].z = (int)(base->mapFl[q].z + 0.5);
+		base->mapdraw[q].x = (int)(base->mapfl[q].x + 0.5);
+		base->mapdraw[q].y = (int)(base->mapfl[q].y + 0.5);
+		base->mapdraw[q].z = (int)(base->mapfl[q].z + 0.5);
 		q++;
 	}
 	draw_map(base);

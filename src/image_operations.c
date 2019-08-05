@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdfHeader.h"
+#include "../includes/fdfheader.h"
 
-void	freeImage(t_base *base)
+void	freeimage(t_base *base)
 {
 	int q;
 

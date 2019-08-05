@@ -10,11 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdfHeader.h"
+#include "../includes/fdfheader.h"
 
-static int check_color(int q, char *line)
+void		free_arr(char ***arr)
 {
-	int count;
+	int		q;
+	char	**temp;
+
+	temp = *arr;
+	q = 0;
+	while (temp[q])
+	{
+		free(temp[q]);
+		q++;
+	}
+	**arr = NULL;
+}
+
+static int	check_color(int q, char *line)
+{
+	int		count;
 
 	count = 0;
 	if (line[q + 1] != '0' && line[q + 2] != 'x')
@@ -36,7 +51,7 @@ static int check_color(int q, char *line)
 	return (q);
 }
 
-static int check_ver(int ver, t_base *base)
+static int	check_ver(int ver, t_base *base)
 {
 	if (base->size_map[0] == 0)
 	{
@@ -48,7 +63,7 @@ static int check_ver(int ver, t_base *base)
 	return (0);
 }
 
-static void check_str(int fd, t_base *base)
+static void	check_str(int fd, t_base *base)
 {
 	char	*line;
 	int		q;
@@ -59,12 +74,12 @@ static void check_str(int fd, t_base *base)
 		ver = 0;
 		base->size_map[1]++;
 		q = 0;
-		while(line[q])
+		while (line[q])
 		{
-			if (( '0' > line[q] || line[q] > '9') && line[q] != ' ' &&
+			if (('0' > line[q] || line[q] > '9') && line[q] != ' ' &&
 				line[q] != '\t' && line[q] != '-' && line[q] != ',')
 				mess_err(3);
-			if (( '0' <= line[q] && line[q] <= '9') && 
+			if (('0' <= line[q] && line[q] <= '9') &&
 			(line[q + 1] == ' ' || line[q + 1] == '\t' ||
 						line[q + 1] == ',' || line[q + 1] == 0))
 				++ver;
@@ -76,9 +91,9 @@ static void check_str(int fd, t_base *base)
 	}
 }
 
-void valid(int ac, char *av, t_base *base)
+void		valid(int ac, char *av, t_base *base)
 {
-	int fd;
+	int		fd;
 
 	if (ac != 2)
 		mess_err(1);
@@ -86,4 +101,3 @@ void valid(int ac, char *av, t_base *base)
 		mess_err(2);
 	check_str(fd, base);
 }
-
