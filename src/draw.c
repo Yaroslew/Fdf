@@ -34,7 +34,7 @@ static void	init_steps(t_base *base, int flag)
 			base->lineDraw->diry = -1;
 		base->lineDraw->stepErr = base->lineDraw->deltaX;
 	}
-}
+} //
 
 static void	stepX(t_base *base)
 {
