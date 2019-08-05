@@ -36,10 +36,6 @@ typedef struct	s_mapFl
 	double			z;
 }				t_mapFl;
 
-/*
- * ---Draw line---
- */
-
 typedef struct	s_line
 {
 	t_map		one;

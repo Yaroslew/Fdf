@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdfHeader.h"
+#include "../includes/fdfHeader.h"
 
 static void	init_steps(t_base *base, int flag)
 {
@@ -34,7 +34,7 @@ static void	init_steps(t_base *base, int flag)
 			base->lineDraw->diry = -1;
 		base->lineDraw->stepErr = base->lineDraw->deltaX;
 	}
-} //
+}
 
 static void	stepX(t_base *base)
 {
@@ -51,7 +51,8 @@ static void	stepX(t_base *base)
 	{
 		pos = (base->win_ver * base->lineDraw->posCenterVer) +
 			  (base->win_ver * one.y + one.x + base->lineDraw->posCenterHor);
-		if (pos > 0 && (pos < base->win_ver * base->win_hor))
+		if ((pos > 0 && (pos < base->win_ver * base->win_hor)) && (one.x + base->lineDraw->posCenterHor < base->win_hor &&
+		one.x + base->lineDraw->posCenterHor > 0))
 			base->data_img[pos] = get_color(one, base->lineDraw->start, two, 1);
 		error += base->lineDraw->stepErr;
 		if (2 * error >= base->lineDraw->deltaX)
@@ -78,7 +79,8 @@ static void	stepY(t_base *base)
 	{
 		pos = (base->win_ver * base->lineDraw->posCenterVer) +
 			  (base->win_ver * one.y + one.x + base->lineDraw->posCenterHor);
-		if (pos > 0 && (pos < base->win_ver * base->win_hor))
+		if ((pos > 0 && (pos < base->win_ver * base->win_hor)) && (one.x + base->lineDraw->posCenterHor < base->win_hor &&
+																   one.x + base->lineDraw->posCenterHor > 0))
 			base->data_img[pos] = get_color(one, base->lineDraw->start, two, 1);
 		error += base->lineDraw->stepErr;
 		if (2 * error >= base->lineDraw->deltaY)
