@@ -87,7 +87,7 @@ static void	write_color_z(char *split, t_map *map, int ind, t_base *base)
 	map[ind].color = base->standart_color;
 }
 
-static void	write_line(t_map *map, int fd, int *size_map, t_base *base)
+static void	write_line(t_map *map, int fd, t_base *base)
 {
 	char	**split;
 	char	*line;
@@ -125,6 +125,6 @@ void		record_map(char *argv, t_base *base)
 	if (!(base->map = malloc(sizeof(t_map) *
 		(base->size_map[0] * base->size_map[1]))))
 		mess_err(0);
-	write_line(base->map, fd, base->size_map, base);
+	write_line(base->map, fd, base);
 	close(fd);
 }

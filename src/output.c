@@ -45,6 +45,7 @@ void			parrprojection(t_base *base, int flag)
 	int			q;
 
 	q = 0;
+	flag = 0;
 	if (base->flagparrproj)
 	{
 		stdoutput(base);

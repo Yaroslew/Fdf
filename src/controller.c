@@ -47,6 +47,8 @@ int				de_key(int key, t_base *base)
 
 void			exitmy(t_base *base, int flag)
 {
+	flag = 0;
+	base->scale = 1;
 	ft_printf("Выход\n");
 	exit(0);
 }
